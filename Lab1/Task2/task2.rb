@@ -15,6 +15,14 @@ def sum_np_div(number)
   sum
 end
 
+# 2. Количество цифр числа, меньших 3
+def less_than_3_cnt(number)
+  result = 0
+  number.digits.each { |dig| result += 1 if dig < 3 }
+  result
+end
+
 puts 'Введите число:'
 x = $stdin.gets.to_i
 puts "Сумма непростых делителей: #{sum_np_div(x)}"
+puts "Количество цифр, меньших 3: #{less_than_3_cnt(x)}"
