@@ -1,5 +1,6 @@
 if ARGV.count < 1
   puts "Вы кто такие? Я Вас не звал!"
+  return
 end
 
 username = ARGV[0]
