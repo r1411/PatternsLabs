@@ -11,6 +11,7 @@ puts "\t1. Циклический сдвиг на 3 влево"
 puts "\t2. Элементы до первого минимального"
 puts "\t3. Проверить лок. максимум по индексу"
 puts "\t4. Элементы, меньшие среднего"
+puts "\t5. Элементы, встречающиеся более 3 раз"
 
 def method6(arr)
   arr.rotate(3)
@@ -35,7 +36,11 @@ def method42(arr)
   arr.filter { |x| x < avg }
 end
 
-methods = %i[method6 method18 method30 method42]
+def method54(arr)
+  arr.filter { |x| arr.count(x) > 3 }.uniq
+end
+
+methods = %i[method6 method18 method30 method42 method54]
 option = gets.chomp.to_i
 unless option.between?(1, methods.length)
   puts 'Неизвестный метод'
