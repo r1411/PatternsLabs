@@ -10,6 +10,7 @@ puts 'Выберите действие:'
 puts "\t1. Циклический сдвиг на 3 влево"
 puts "\t2. Элементы до первого минимального"
 puts "\t3. Проверить лок. максимум по индексу"
+puts "\t4. Элементы, меньшие среднего"
 
 def method6(arr)
   arr.rotate(3)
@@ -28,7 +29,13 @@ def method30(arr)
   arr[test_idx - 1] <= arr[test_idx] and arr[test_idx + 1] <= arr[test_idx]
 end
 
-methods = %i[method6 method18 method30]
+def method42(arr)
+  avg = arr.sum / arr.length.to_f
+  puts "Среднее арифметическое: #{avg}"
+  arr.filter { |x| x < avg }
+end
+
+methods = %i[method6 method18 method30 method42]
 option = gets.chomp.to_i
 unless option.between?(1, methods.length)
   puts 'Неизвестный метод'
