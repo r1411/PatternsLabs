@@ -13,39 +13,50 @@ puts "\t3. Проверить лок. максимум по индексу"
 puts "\t4. Элементы, меньшие среднего"
 puts "\t5. Элементы, встречающиеся более 3 раз"
 
-def method6(arr)
+def cycle_triple_shift_left(arr)
   arr.rotate(3)
 end
 
-def method18(arr)
+def elements_before_first_min(arr)
   stop_elem = arr.min
   arr[0, arr.index(stop_elem)]
 end
 
-def method30(arr)
-  puts 'Индекс проверки лок. максимума:'
-  test_idx = gets.chomp.to_i
-  return false unless test_idx.between?(1, arr.length - 2)
+def check_local_max(arr, idx)
+  idx = Integer(idx)
+  return false unless idx.between?(1, arr.length - 2)
 
-  arr[test_idx - 1] <= arr[test_idx] and arr[test_idx + 1] <= arr[test_idx]
+  arr[idx - 1] <= arr[idx] and arr[idx + 1] <= arr[idx]
 end
 
-def method42(arr)
+def elements_less_than_avg(arr)
   avg = arr.sum / arr.length.to_f
-  puts "Среднее арифметическое: #{avg}"
   arr.filter { |x| x < avg }
 end
 
-def method54(arr)
+def elements_more_than_3_times(arr)
   arr.filter { |x| arr.count(x) > 3 }.uniq
 end
 
-methods = %i[method6 method18 method30 method42 method54]
+methods = %i[
+  cycle_triple_shift_left
+  elements_before_first_min
+  check_local_max
+  elements_less_than_avg
+  elements_more_than_3_times
+]
 option = gets.chomp.to_i
 unless option.between?(1, methods.length)
   puts 'Неизвестный метод'
   return
 end
 
-result = method(methods[option - 1]).call(arr)
+my_method = method(methods[option - 1])
+additional_args = []
+(my_method.arity - 1).times do |i|
+  print "Аргумент №#{i + 1}: "
+  additional_args << gets
+end
+
+result = my_method.call(arr, *additional_args)
 puts "Результат: #{result.inspect}"
