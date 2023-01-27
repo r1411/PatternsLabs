@@ -13,4 +13,13 @@ class Student
     @email = email
     @git = git
   end
+
+  def to_s
+    result = "#{@last_name} #{@first_name} #{@father_name}"
+    %i[id phone telegram email git].each do |attr|
+      attr_val = send(attr)
+      result += ", #{attr}=#{attr_val}" unless attr_val.nil?
+    end
+    result
+  end
 end
