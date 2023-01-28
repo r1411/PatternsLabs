@@ -11,3 +11,14 @@ puts student1
 puts student2
 puts student3
 puts student4
+
+def test_invalid_phone(phone)
+  Student.new('Иванов', 'Иван', 'Иванович', { phone: phone })
+rescue ArgumentError => e
+  puts e.message
+end
+
+test_invalid_phone('123123')
+test_invalid_phone('799966622')
+test_invalid_phone('iphone')
+test_invalid_phone('11111111111')
