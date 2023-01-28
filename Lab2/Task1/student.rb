@@ -74,6 +74,18 @@ class Student
     @email = new_email
   end
 
+  def valid_contacts?
+    !phone.nil? || !telegram.nil? || !email.nil?
+  end
+
+  def valid_git?
+    !git.nil?
+  end
+
+  def valid?
+    valid_contacts? && valid_git?
+  end
+
   def to_s
     result = "#{last_name} #{first_name} #{father_name}"
     %i[id phone telegram email git].each do |attr|

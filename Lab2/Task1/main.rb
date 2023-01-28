@@ -8,9 +8,13 @@ student3 = Student.new('Обоев', 'Рулон', 'Джамшутович', { p
 student4 = Student.new('Пингвинов', 'Косяк', 'Олегович', { id: 3, phone: '79990001122', telegram: 'pngn', email: 'antarctica@gmail.com', git: 'iampngn' })
 
 puts student1
+puts "Valid: #{student1.valid?}"
 puts student2
+puts "Valid: #{student2.valid?}"
 puts student3
+puts "Valid: #{student3.valid?}"
 puts student4
+puts "Valid: #{student4.valid?}"
 
 def test_invalid_options(options)
   Student.new('Иванов', 'Иван', 'Иванович', options)
