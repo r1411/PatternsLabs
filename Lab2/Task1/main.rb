@@ -12,13 +12,15 @@ puts student2
 puts student3
 puts student4
 
-def test_invalid_phone(phone)
-  Student.new('Иванов', 'Иван', 'Иванович', { phone: phone })
+def test_invalid_options(options)
+  Student.new('Иванов', 'Иван', 'Иванович', options)
 rescue ArgumentError => e
   puts e.message
 end
 
-test_invalid_phone('123123')
-test_invalid_phone('799966622')
-test_invalid_phone('iphone')
-test_invalid_phone('11111111111')
+test_invalid_options({ phone: '123123' })
+test_invalid_options({ phone: '799966622' })
+test_invalid_options({ phone: 'iphone' })
+test_invalid_options({ phone: '11111111111' })
+test_invalid_options({ email: 'hello@world' })
+test_invalid_options({ telegram: 'вася пупкин' })
