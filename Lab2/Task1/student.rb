@@ -86,6 +86,12 @@ class Student
     valid_contacts? && valid_git?
   end
 
+  def set_contacts(contacts)
+    self.phone = contacts[:phone] if contacts.key?(:phone)
+    self.telegram = contacts[:telegram] if contacts.key?(:telegram)
+    self.email = contacts[:email] if contacts.key?(:email)
+  end
+
   def to_s
     result = "#{last_name} #{first_name} #{father_name}"
     %i[id phone telegram email git].each do |attr|

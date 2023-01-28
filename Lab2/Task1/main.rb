@@ -7,6 +7,8 @@ student2 = Student.new('Сараев', 'Поджог', 'Равшанович', {
 student3 = Student.new('Обоев', 'Рулон', 'Джамшутович', { phone: '79997775533', email: 'wallpapers@mail.ru', git: 'roboyev' })
 student4 = Student.new('Пингвинов', 'Косяк', 'Олегович', { id: 3, phone: '79990001122', telegram: 'pngn', email: 'antarctica@gmail.com', git: 'iampngn' })
 
+student2.set_contacts({ email: 'mrfire@bk.ru', phone: '79876543210' })
+
 puts student1
 puts "Valid: #{student1.valid?}"
 puts student2
