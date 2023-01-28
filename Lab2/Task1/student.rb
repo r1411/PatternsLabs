@@ -3,15 +3,15 @@
 class Student
   attr_accessor :last_name, :first_name, :father_name, :id, :phone, :telegram, :email, :git
 
-  def initialize(last_name, first_name, father_name, id: nil, phone: nil, telegram: nil, email: nil, git: nil)
+  def initialize(last_name, first_name, father_name, options = {})
     @last_name = last_name
     @first_name = first_name
     @father_name = father_name
-    @id = id
-    @phone = phone
-    @telegram = telegram
-    @email = email
-    @git = git
+    @id = options[:id]
+    @phone = options[:phone]
+    @telegram = options[:telegram]
+    @email = options[:email]
+    @git = options[:git]
   end
 
   def to_s
