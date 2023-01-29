@@ -55,3 +55,7 @@ begin
 rescue JSON::ParserError => e
   puts "Тест 3: #{e.message}"
 end
+
+puts '--------------------------------'
+
+puts student5.short_info

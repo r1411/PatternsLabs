@@ -21,6 +21,9 @@ class Student {
     +valid_git?(): Boolean
     +valid?(): Boolean
     +set_contacts(Hash)
+    +short_contact(): String
+    +short_name(): String
+    +short_info(): String
     +to_s(): String
     +to_json_str(): String
 }
