@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 class Student
   def self.valid_name?(name)
     name.match(/(^[А-Я][а-я]+$)|(^[A-Z][a-z]+$)/)
@@ -17,6 +19,16 @@ class Student
     email.match(/^(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/)
   end
 
+  def self.from_json_str(str)
+    params = JSON.parse(str)
+    raise ArgumentError, 'Fields required: fist_name, last_name, father_name' unless params.key?('first_name') && params.key?('last_name') && params.key?('father_name')
+
+    first_name = params.delete('first_name')
+    last_name = params.delete('last_name')
+    father_name = params.delete('father_name')
+
+    Student.new(first_name, last_name, father_name, params.transform_keys(&:to_sym))
+  end
 
   attr_accessor :id
   attr_reader :last_name, :first_name, :father_name, :phone, :telegram, :email, :git
@@ -99,5 +111,14 @@ class Student
       result += ", #{attr}=#{attr_val}" unless attr_val.nil?
     end
     result
+  end
+
+  def to_json_str
+    attrs = {}
+    %i[last_name first_name father_name id phone telegram email git].each do |attr|
+      attr_val = send(attr)
+      attrs[attr] = attr_val unless attr_val.nil?
+    end
+    JSON.generate(attrs)
   end
 end

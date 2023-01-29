@@ -30,3 +30,28 @@ test_invalid_options({ phone: 'iphone' })
 test_invalid_options({ phone: '11111111111' })
 test_invalid_options({ email: 'hello@world' })
 test_invalid_options({ telegram: 'вася пупкин' })
+
+puts '--------------------------------'
+
+student5 = Student.new('Голубев', 'Доброжир', 'Братиславович', { id: 4, email: 'gold@mail.ru', git: 'zhirbrother' })
+puts student5.to_json_str
+
+puts Student.from_json_str('{"first_name": "Сергеев", "last_name": "Сергей", "father_name": "Сергеевич", "id": 5, "phone": "79996665544"}')
+
+begin
+  Student.from_json_str('{"first_name": "Петя", "email":"pe@tya.com"}')
+rescue ArgumentError => e
+  puts "Тест 1: #{e.message}"
+end
+
+begin
+  Student.from_json_str('{"first_name": "Куков", "last_name": "Айфон", "father_name": "Степанович", "id": 5, "phone": "123123123"}')
+rescue ArgumentError => e
+  puts "Тест 2: #{e.message}"
+end
+
+begin
+  Student.from_json_str('Петя')
+rescue JSON::ParserError => e
+  puts "Тест 3: #{e.message}"
+end

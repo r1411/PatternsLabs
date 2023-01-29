@@ -14,6 +14,7 @@ class Student {
     +{static}valid_phone?(String): Boolean
     +{static}valid_profile_name?(String): Boolean
     +{static}valid_email?(String): Boolean
+    +{static}from_json_str(String): Student
     +initialize(String, String, String, Hash)
     +(all accessors)
     +valid_contacts?(): Boolean
@@ -21,6 +22,7 @@ class Student {
     +valid?(): Boolean
     +set_contacts(Hash)
     +to_s(): String
+    +to_json_str(): String
 }
 
 @enduml
