@@ -112,12 +112,12 @@ class Student
     nil
   end
 
-  def short_name
+  def last_name_and_initials
     "#{last_name} #{first_name[0]}. #{father_name[0]}."
   end
 
   def short_info
-    "#{short_name}, #{short_contact}, Git: #{git}"
+    "#{last_name_and_initials}, #{short_contact}, Git: #{git}"
   end
 
   def to_s
