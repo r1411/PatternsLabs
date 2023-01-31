@@ -3,6 +3,7 @@
 require 'json'
 
 class Student
+  # Валидаторы для полей
   def self.valid_name?(name)
     name.match(/(^[А-Я][а-я]+$)|(^[A-Z][a-z]+$)/)
   end
@@ -19,6 +20,7 @@ class Student
     email.match(/^(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/)
   end
 
+  # Конструктор из JSON строки
   def self.from_json_str(str)
     params = JSON.parse(str)
     raise ArgumentError, 'Fields required: fist_name, last_name, father_name' unless params.key?('first_name') && params.key?('last_name') && params.key?('father_name')
@@ -30,9 +32,11 @@ class Student
     Student.new(first_name, last_name, father_name, params.transform_keys(&:to_sym))
   end
 
+  # Стандартные геттеры и сеттеры для полей
   attr_accessor :id
   attr_reader :last_name, :first_name, :father_name, :phone, :telegram, :email, :git
 
+  # Стандартный конструктор
   def initialize(last_name, first_name, father_name, options = {})
     self.last_name = last_name
     self.first_name = first_name
@@ -44,6 +48,7 @@ class Student
     self.git = options[:git]
   end
 
+  # Сеттеры с валидацией перед присваиванием
   def last_name=(new_last_name)
     raise ArgumentError, "Invalid argument: last_name=#{new_last_name}" unless Student.valid_name?(new_last_name)
 
@@ -86,6 +91,7 @@ class Student
     @email = new_email
   end
 
+  # Валидаторы объекта
   def valid_contacts?
     !phone.nil? || !telegram.nil? || !email.nil?
   end
@@ -98,12 +104,14 @@ class Student
     valid_contacts? && valid_git?
   end
 
+  # Отдельный сеттер для массовой установки контактов
   def set_contacts(contacts)
     self.phone = contacts[:phone] if contacts.key?(:phone)
     self.telegram = contacts[:telegram] if contacts.key?(:telegram)
     self.email = contacts[:email] if contacts.key?(:email)
   end
 
+  # Краткая информация о контактах пользователя
   def short_contact
     return "Tg: #{telegram}" unless telegram.nil?
     return "Email: #{email}" unless email.nil?
@@ -112,14 +120,17 @@ class Student
     nil
   end
 
+  # Имя пользователя в формате Фамилия И. О.
   def last_name_and_initials
     "#{last_name} #{first_name[0]}. #{father_name[0]}."
   end
 
+  # Краткая информация о пользователе
   def short_info
     "#{last_name_and_initials}, #{short_contact}, Git: #{git}"
   end
 
+  # Методы приведения объекта к строке
   def to_s
     result = "#{last_name} #{first_name} #{father_name}"
     %i[id phone telegram email git].each do |attr|
