@@ -1,31 +1,81 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class Student {
+class StudentBase {
     -id: Integer
-    -last_name: String
-    -first_name: String
-    -father_name: String
     -phone: String
     -telegram: String
     -email: String
     -git: String
+    --
     +{static}valid_name?(String): Boolean
     +{static}valid_phone?(String): Boolean
     +{static}valid_profile_name?(String): Boolean
     +{static}valid_email?(String): Boolean
-    +{static}from_json_str(String): Student
-    +initialize(String, String, String, Hash)
-    +(all accessors)
+    +initialize(Hash)
+    +short_contact(): String
     +valid_contacts?(): Boolean
     +valid_git?(): Boolean
     +valid?(): Boolean
+    .. Геттеры ..
+    +id(): Integer
+    +git(): String
+    #phone(): String
+    #telegram(): String
+    #email(): String
+    .. Сеттеры ..
+    #id=(Integer)
+    #git=(String)
+    #phone=(String)
+    #telegram=(String)
+    #email=(String)
+}
+
+class Student extends StudentBase {
+    -last_name: String
+    -first_name: String
+    -father_name: String
+    --
+    +{static}from_json_str(String): Student
+    +initialize(String, String, String, Hash)
     +set_contacts(Hash)
-    +short_contact(): String
-    +short_name(): String
+    +last_name_and_initials(): String
     +short_info(): String
     +to_s(): String
     +to_json_str(): String
+    .. Геттеры ..
+    +phone(): String
+    +telegram(): String
+    +email(): String
+    +last_name(): String
+    +first_name(): String
+    +father_name(): String
+    .. Сеттеры ..
+    +id=(Integer)
+    +git=(String)
+    +phone=(String)
+    +telegram=(String)
+    +email=(String)
+    +last_name=(String)
+    +first_name=(String)
+    +father_name=(String)
+}
+
+class ShortStudent extends StudentBase {
+    -last_name_and_initials: String
+    -contact: Hash
+    --
+    +{static}from_student(Student): ShortStudent
+    +initialize(Integer, String)
+    +to_s(): String
+    .. Геттеры ..
+    +id(): Integer
+    +last_name_and_initials(): String
+    +contact(): Hash
+    +git(): String
+    .. Сеттеры ..
+    -last_name_and_initials=(String)
+    -contact=(Hash)
 }
 
 @enduml

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'student'
+require_relative 'student_short'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
 student2 = Student.new('Сараев', 'Поджог', 'Равшанович', { id: 1, telegram: 'nightfire' })
@@ -59,3 +60,6 @@ end
 puts '--------------------------------'
 
 puts student5.short_info
+
+short1 = StudentShort.from_student(student5)
+puts short1
