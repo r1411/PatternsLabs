@@ -69,10 +69,8 @@ class ShortStudent extends StudentBase {
     +initialize(Integer, String)
     +to_s(): String
     .. Геттеры ..
-    +id(): Integer
     +last_name_and_initials(): String
     +contact(): Hash
-    +git(): String
     .. Сеттеры ..
     -last_name_and_initials=(String)
     -contact=(Hash)

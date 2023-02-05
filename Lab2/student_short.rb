@@ -9,7 +9,7 @@ class StudentShort < StudentBase
 
   public
 
-  attr_reader :last_name_and_initials, :contact, :id, :git
+  attr_reader :last_name_and_initials, :contact
 
   # Конструктор из Student
   def self.from_student(student)
