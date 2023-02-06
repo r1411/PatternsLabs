@@ -14,8 +14,8 @@ class StudentBase {
     +{static}valid_email?(String): Boolean
     +initialize(Hash)
     +short_contact(): String
-    +valid_contacts?(): Boolean
-    +valid_git?(): Boolean
+    +has_contacts?(): Boolean
+    +has_git?(): Boolean
     +valid?(): Boolean
     .. Геттеры ..
     +id(): Integer

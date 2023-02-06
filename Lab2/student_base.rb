@@ -83,15 +83,15 @@ class StudentBase
   public
 
   # Валидаторы объекта
-  def valid_contacts?
+  def has_contacts?
     !phone.nil? || !telegram.nil? || !email.nil?
   end
 
-  def valid_git?
+  def has_git?
     !git.nil?
   end
 
   def valid?
-    valid_contacts? && valid_git?
+    has_contacts? && has_git?
   end
 end
