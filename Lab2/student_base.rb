@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class StudentBase
+  # Запрещаем создание базового класса (он "абстрактный")
+  private_class_method :new
+
   # Валидаторы для полей
   def self.valid_name?(name)
     name.match(/(^[А-Я][а-я]+$)|(^[A-Z][a-z]+$)/)

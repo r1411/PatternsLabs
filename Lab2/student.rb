@@ -4,6 +4,9 @@ require 'json'
 require_relative 'student_base'
 
 class Student < StudentBase
+  # Делаем new предка публичным
+  public_class_method :new
+
   # Конструктор из JSON строки
   def self.from_json_str(str)
     params = JSON.parse(str)

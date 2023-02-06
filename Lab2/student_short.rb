@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class StudentShort < StudentBase
+  # Делаем new предка публичным
+  public_class_method :new
+
   # Стандартные геттеры и сеттеры
 
   private
