@@ -14,7 +14,7 @@ abstract class StudentBase {
     +{static}valid_phone?(String): Boolean
     +{static}valid_profile_name?(String): Boolean
     +{static}valid_email?(String): Boolean
-    +initialize(Hash)
+    -initialize(Hash)
     +short_contact(): String
     +has_contacts?(): Boolean
     +has_git?(): Boolean
