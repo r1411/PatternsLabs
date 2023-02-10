@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+DataTable -- Student
+
 abstract class StudentBase {
     -id: Integer
     -phone: String
@@ -74,6 +76,14 @@ class ShortStudent extends StudentBase {
     .. Сеттеры ..
     -last_name_and_initials=(String)
     -contact=(Hash)
+}
+
+class DataTable {
+    -table: Array
+    --
+    {static}+student_to_array(Student): Array
+    +initialize(*Student)
+    +to_s(): String
 }
 
 @enduml
