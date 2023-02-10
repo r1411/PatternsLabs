@@ -70,3 +70,17 @@ puts '--------------------------------'
 table = DataTable.new(student1, student2, student3, student4, student5)
 
 puts table
+
+arr = table.get_row(1)
+puts arr.inspect
+arr[0] = 55535
+arr[1] = 'Абвгд'
+
+arr2 = table.get_row(1)
+puts arr2.inspect
+
+arr3 = table.get_row_by_student_id(3)
+puts arr3.inspect
+
+puts "В таблице #{table.rows_count} строк"
+puts "В таблице #{table.columns_count} столбцов"
