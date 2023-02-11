@@ -19,35 +19,15 @@ class DataTable
   private
 
   attr_accessor :table
-  attr_writer :columns_count
 
   public
 
-  attr_reader :columns_count
-
   def initialize(*students)
-    self.columns_count = 8
     self.table = []
     students.each { |student| table.append(DataTable.student_to_array(student)) }
   end
 
-  def get_row(row_number)
-    table[row_number].clone
-  end
-
-  def get_row_by_student_id(id)
-    table.each do |row|
-      return row.clone if row[0] == id
-    end
-
-    nil
-  end
-
-  def rows_count
-    table.size
-  end
-
   def to_s
-    "DataTable (#{rows_count} rows)"
+    "DataTable (#{table.size} rows)"
   end
 end
