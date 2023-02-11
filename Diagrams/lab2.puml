@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-DataTable o-- Student
+DataTable -- Student
 
 abstract class StudentBase {
     -id: Integer
@@ -83,10 +83,6 @@ class DataTable {
     --
     {static}+student_to_array(Student): Array
     +initialize(*Student)
-    +get_row(Integer): Array
-    +get_row_by_student_id(): Array
-    +rows_count(): Integer
-    +columns_count(): Integer
     +to_s(): String
 }
 
