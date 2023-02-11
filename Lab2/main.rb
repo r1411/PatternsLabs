@@ -2,7 +2,6 @@
 
 require_relative 'student'
 require_relative 'student_short'
-require_relative 'data_table'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
 student2 = Student.new('Сараев', 'Поджог', 'Равшанович', { id: 1, telegram: 'nightfire' })
@@ -64,9 +63,3 @@ puts student5.short_info
 
 short1 = StudentShort.from_student(student5)
 puts short1
-
-puts '--------------------------------'
-
-table = DataTable.new(student1, student2, student3, student4, student5)
-
-puts table
