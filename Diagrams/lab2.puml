@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+DataList ..> DataTable
+
 abstract class StudentBase {
     -id: Integer
     -phone: String
@@ -91,6 +93,22 @@ class DataTable {
     -rows_count=(Integer)
     -cols_count=(Integer)
     -table=(Array)
+}
+
+abstract class DataList {
+    -objects
+    -selected_id
+    --
+    -initialize(Array)
+    +select_element(Integer)
+    +column_names(): Array
+    +data_table(): DataTable
+    .. Геттеры ..
+    +selected_id(): Integer
+    -objects(): Array
+    .. Сеттеры ..
+    -selected_id=(Integer)
+    -objects=(Array)
 }
 
 @enduml
