@@ -2,6 +2,7 @@
 
 require_relative 'student'
 require_relative 'student_short'
+require_relative 'data_table'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
 student2 = Student.new('Сараев', 'Поджог', 'Равшанович', { id: 1, telegram: 'nightfire' })
@@ -63,3 +64,10 @@ puts student5.short_info
 
 short1 = StudentShort.from_student(student5)
 puts short1
+
+puts '--------------------------------'
+
+test_matrix = [[1, 'Petya', true], [2, 'Igor', false]]
+test_table = DataTable.new(test_matrix)
+puts test_table
+puts test_table.get_item(0, 1)

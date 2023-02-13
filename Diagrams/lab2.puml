@@ -76,4 +76,21 @@ class ShortStudent extends StudentBase {
     -contact=(Hash)
 }
 
+class DataTable {
+    -table: Array
+    -rows_count: Integer
+    -cols_count: Integer
+    --
+    +initialize(Array)
+    +get_item(Integer, Integer): Object
+    .. Геттеры ..
+    +rows_count(): Integer
+    +cols_count(): Integer
+    -table(): Array
+    .. Сеттеры ..
+    -rows_count=(Integer)
+    -cols_count=(Integer)
+    -table=(Array)
+}
+
 @enduml
