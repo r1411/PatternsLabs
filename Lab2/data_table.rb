@@ -3,6 +3,7 @@
 class DataTable
   attr_reader :rows_count, :cols_count
 
+  # Конструктор, принимает 2D Array
   def initialize(table)
     self.rows_count = table.size
     max_cols = 0
@@ -11,6 +12,7 @@ class DataTable
     self.table = table
   end
 
+  # Получить значение в ячейке [row, col]
   def get_item(row, col)
     return nil if row >= rows_count
     return nil if col >= cols_count
