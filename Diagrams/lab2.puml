@@ -84,7 +84,7 @@ class DataTable {
     -cols_count: Integer
     --
     +initialize(Array)
-    +get_item(Integer, Integer): Object
+    +get_item(Integer, Integer): String
     .. Геттеры ..
     +rows_count(): Integer
     +cols_count(): Integer

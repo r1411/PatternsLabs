@@ -12,12 +12,12 @@ class DataTable
     self.table = table
   end
 
-  # Получить значение в ячейке [row, col]
+  # Получить строковое представление значения в ячейке [row, col]
   def get_item(row, col)
     return nil if row >= rows_count
     return nil if col >= cols_count
 
-    table[row][col].dup
+    table[row][col].to_s
   end
 
   def to_s
