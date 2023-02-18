@@ -35,7 +35,7 @@ class StudentShort < StudentBase
     options[:id] = id
     options[:git] = git
     options[contact[:type].to_sym] = contact[:value]
-    super(options)
+    super(**options)
   end
 
   # Методы приведения объекта к строке

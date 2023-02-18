@@ -33,12 +33,12 @@ class StudentBase
   attr_reader :id, :git
 
   # Стандартный конструктор
-  def initialize(options)
-    self.id = options[:id]
-    self.phone = options[:phone]
-    self.telegram = options[:telegram]
-    self.email = options[:email]
-    self.git = options[:git]
+  def initialize(id: nil, phone: nil, telegram: nil, email: nil, git: nil)
+    self.id = id
+    self.phone = phone
+    self.telegram = telegram
+    self.email = email
+    self.git = git
   end
 
   # Краткая информация о первом доступном контакте пользователя

@@ -16,7 +16,7 @@ class Student < StudentBase
     last_name = params.delete('last_name')
     father_name = params.delete('father_name')
 
-    Student.new(first_name, last_name, father_name, params.transform_keys(&:to_sym))
+    Student.new(first_name, last_name, father_name, **params.transform_keys(&:to_sym))
   end
 
   # Делаем публичными геттеры и сеттеры базового класса
@@ -26,11 +26,11 @@ class Student < StudentBase
   attr_reader :last_name, :first_name, :father_name
 
   # Стандартный конструктор
-  def initialize(last_name, first_name, father_name, options = {})
+  def initialize(last_name, first_name, father_name, **options)
     self.last_name = last_name
     self.first_name = first_name
     self.father_name = father_name
-    super(options)
+    super(**options)
   end
 
   # Сеттеры с валидацией перед присваиванием
@@ -53,10 +53,10 @@ class Student < StudentBase
   end
 
   # Отдельный сеттер для массовой установки контактов
-  def set_contacts(contacts)
-    self.phone = contacts[:phone] if contacts.key?(:phone)
-    self.telegram = contacts[:telegram] if contacts.key?(:telegram)
-    self.email = contacts[:email] if contacts.key?(:email)
+  def set_contacts(phone: nil, telegram: nil, email: nil)
+    self.phone = phone if phone
+    self.telegram = telegram if telegram
+    self.email = email if email
   end
 
   # Имя пользователя в формате Фамилия И. О.
