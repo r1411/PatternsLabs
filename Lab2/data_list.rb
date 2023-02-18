@@ -4,16 +4,18 @@ class DataList
   # Это "абстрактный" класс
   private_class_method :new
 
-  attr_reader :selected_id
-
   # Конструктор, принимает массив любых объектов
   def initialize(objects)
     self.objects = objects
   end
 
   # Выбрать элемент по номеру
-  def select_element(id)
-    self.selected_id = id < objects.size ? id : nil
+  def select_element(number)
+    self.selected_num = number < objects.size ? number : nil
+  end
+
+  def selected_id
+    objects[selected_num].id
   end
 
   # Имена атрибутов объектов по порядку. Переопределить в наследниках
@@ -28,6 +30,5 @@ class DataList
 
   private
 
-  attr_accessor :objects
-  attr_writer :selected_id
+  attr_accessor :objects, :selected_num
 end

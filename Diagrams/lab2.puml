@@ -97,17 +97,18 @@ class DataTable {
 
 abstract class DataList {
     -objects
-    -selected_id
+    -selected_num
     --
     -initialize(Array)
     +select_element(Integer)
     +column_names(): Array
     +data_table(): DataTable
-    .. Геттеры ..
     +selected_id(): Integer
+    .. Геттеры ..
+    -selected_num(): Integer
     -objects(): Array
     .. Сеттеры ..
-    -selected_id=(Integer)
+    -selected_num=(Integer)
     -objects=(Array)
 }
 
