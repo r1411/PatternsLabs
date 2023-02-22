@@ -78,7 +78,20 @@ short3 = StudentShort.from_student(student4)
 
 short_list = DataListStudentShort.new([short1, short2, short3])
 
-puts short_list.data_table
+short_table = short_list.data_table
+puts short_table
 
 short_list.select_element(2)
 puts "Вырбан элемент #2 с id=#{short_list.selected_id}"
+
+print 'id'.ljust(45)
+short_list.column_names.each { |col_name| print col_name.ljust(45) }
+puts
+
+0.upto(short_table.rows_count - 1) do |row|
+  0.upto(short_table.cols_count - 1) do |col|
+    item = short_table.get_item(row, col)
+    print item.to_s.ljust(45)
+  end
+  puts
+end
