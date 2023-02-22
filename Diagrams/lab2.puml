@@ -104,6 +104,7 @@ abstract class DataList {
     +column_names(): Array
     +data_table(): DataTable
     +selected_id(): Integer
+    #table_fields(Object): Array
     .. Геттеры ..
     -selected_num(): Integer
     -objects(): Array
@@ -116,7 +117,7 @@ class DataListStudentShort extends DataList {
     --
     +initialize(Array)
     +column_names(): Array
-    +data_table(): DataTable
+    #table_fields(StudentShort): Array
 }
 
 @enduml

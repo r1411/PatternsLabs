@@ -10,18 +10,9 @@ class DataListStudentShort < DataList
     %w[git contact last_name_and_initials]
   end
 
-  def data_table
-    result = []
-    counter = 0
-    objects.each do |obj|
-      row = []
-      row << counter
-      row << obj.git
-      row << obj.contact
-      row << obj.last_name_and_initials
-      result << row
-      counter += 1
-    end
-    DataTable.new(result)
+  protected
+
+  def table_fields(obj)
+    [obj.git, obj.contact, obj.last_name_and_initials]
   end
 end
