@@ -84,7 +84,7 @@ class DataTable {
     -cols_count: Integer
     --
     +initialize(Array)
-    +get_item(Integer, Integer): String
+    +get_item(Integer, Integer): Object
     .. Геттеры ..
     +rows_count(): Integer
     +cols_count(): Integer
@@ -110,7 +110,7 @@ abstract class DataList {
     -objects(): Array
     .. Сеттеры ..
     -selected_num=(Integer)
-    -objects=(Array)
+    +objects=(Array)
 }
 
 class DataListStudentShort extends DataList {
