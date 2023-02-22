@@ -112,4 +112,11 @@ abstract class DataList {
     -objects=(Array)
 }
 
+class DataListStudentShort extends DataList {
+    --
+    +initialize(Array)
+    +column_names(): Array
+    +data_table(): DataTable
+}
+
 @enduml

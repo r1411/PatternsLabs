@@ -3,6 +3,7 @@
 require_relative 'student'
 require_relative 'student_short'
 require_relative 'data_table'
+require_relative 'data_list_student_short'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
 student2 = Student.new('Сараев', 'Поджог', 'Равшанович', id: 1, telegram: 'nightfire')
@@ -71,3 +72,13 @@ test_matrix = [[1, 'Petya', true], [2, 'Igor', false]]
 test_table = DataTable.new(test_matrix)
 puts test_table
 puts test_table.get_item(0, 1)
+
+short2 = StudentShort.from_student(student2)
+short3 = StudentShort.from_student(student4)
+
+short_list = DataListStudentShort.new([short1, short2, short3])
+
+puts short_list.data_table
+
+short_list.select_element(2)
+puts "Вырбан элемент #2 с id=#{short_list.selected_id}"
