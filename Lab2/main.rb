@@ -4,6 +4,7 @@ require_relative 'student'
 require_relative 'student_short'
 require_relative 'data_table'
 require_relative 'data_list_student_short'
+require 'json'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
 student2 = Student.new('Сараев', 'Поджог', 'Равшанович', id: 1, telegram: 'nightfire')
@@ -94,4 +95,17 @@ puts
     print item.to_s.ljust(45)
   end
   puts
+end
+
+puts '--------------------------------'
+puts 'Тест формирования StudentShort из строк таблицы:'
+
+0.upto(short_table.rows_count - 1) do |row|
+  stud_info = {}
+  1.upto(short_table.cols_count - 1) do |col|
+    stud_info[short_list.column_names[col - 1].to_sym] = short_table.get_item(row, col)
+  end
+
+  my_student = StudentShort.new(short_table.get_item(row, 0), JSON.generate(stud_info))
+  puts my_student
 end
