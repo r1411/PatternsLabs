@@ -4,6 +4,8 @@ class DataList
   # Это "абстрактный" класс
   private_class_method :new
 
+  attr_writer :objects
+
   # Конструктор, принимает массив любых объектов
   def initialize(objects)
     self.objects = objects
@@ -46,5 +48,6 @@ class DataList
 
   private
 
-  attr_accessor :objects, :selected_num
+  attr_reader :objects
+  attr_accessor :selected_num
 end

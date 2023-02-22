@@ -109,3 +109,6 @@ puts 'Тест формирования StudentShort из строк табли�
   my_student = StudentShort.new(short_table.get_item(row, 0), JSON.generate(stud_info))
   puts my_student
 end
+
+short_list.objects = []
+puts short_list.data_table
