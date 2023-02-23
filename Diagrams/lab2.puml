@@ -101,9 +101,9 @@ abstract class DataList {
     --
     -initialize(Array)
     +select_element(Integer)
-    +column_names(): Array
     +data_table(): DataTable
     +selected_id(): Integer
+    #column_names(): Array
     #table_fields(Object): Array
     .. Геттеры ..
     -selected_num(): Integer

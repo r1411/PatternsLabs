@@ -20,12 +20,7 @@ class DataList
     objects[selected_num].id
   end
 
-  # Имена атрибутов объектов по порядку. Переопределить в наследниках
-  def column_names
-    []
-  end
-
-  # Получить DataTable со всеми элементами. Переопределить в наследниках
+  # Получить DataTable со всеми элементами.
   def data_table
     result = []
     counter = 0
@@ -41,8 +36,13 @@ class DataList
 
   protected
 
-  # Список значений полей для DataTable
+  # Список значений полей для DataTable. Переопределить в наследниках
   def table_fields(_obj)
+    []
+  end
+
+  # Имена атрибутов объектов по порядку. Переопределить в наследниках
+  def column_names
     []
   end
 
