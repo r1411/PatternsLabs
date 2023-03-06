@@ -4,6 +4,7 @@ require_relative 'student'
 require_relative 'student_short'
 require_relative 'data_table'
 require_relative 'data_list_student_short'
+require_relative 'students_list_json'
 require 'json'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
@@ -112,3 +113,37 @@ end
 
 short_list.objects = []
 puts short_list.data_table
+
+puts '--------------------------------'
+puts 'Тест StudentsListJSON:'
+
+stud_list_json = StudentsListJSON.new
+stud_list_json.add_student(student1)
+stud_list_json.add_student(student2)
+stud_list_json.add_student(student3)
+stud_list_json.add_student(student4)
+stud_list_json.add_student(student5)
+stud_list_json.save_to_file('./Lab2/test_data/students.json')
+
+stud_list_json.load_from_file('./Lab2/test_data/students.json')
+
+puts "Успешно записано и прочитано #{stud_list_json.student_count} студентов:"
+
+1.upto(stud_list_json.student_count).each { |id| puts stud_list_json.student_by_id(id) }
+
+puts 'Вывод студентов по страницам из 2х человек: '
+pages_count = (stud_list_json.student_count / 2.0).ceil
+1.upto(pages_count) do |page|
+  puts "Страница #{page} / #{pages_count}:"
+  page_data = stud_list_json.paginated_short_students(page, 2)
+  print('id'.ljust(50))
+  page_data.column_names.each { |col_name| print col_name.ljust(50) }
+  puts
+  table = page_data.data_table
+  (0...table.rows_count).each do |row|
+    (0...short_table.cols_count).each do |col|
+      print table.get_item(row, col).to_s.ljust(50)
+    end
+    puts
+  end
+end

@@ -1,0 +1,44 @@
+[
+  {
+    "last_name": "Иванов",
+    "first_name": "Иван",
+    "father_name": "Иванович",
+    "id": 1
+  },
+  {
+    "last_name": "Сараев",
+    "first_name": "Поджог",
+    "father_name": "Равшанович",
+    "id": 2,
+    "phone": "79876543210",
+    "telegram": "nightfire",
+    "email": "mrfire@bk.ru"
+  },
+  {
+    "last_name": "Обоев",
+    "first_name": "Рулон",
+    "father_name": "Джамшутович",
+    "id": 3,
+    "phone": "79997775533",
+    "email": "wallpapers@mail.ru",
+    "git": "roboyev"
+  },
+  {
+    "last_name": "Пингвинов",
+    "first_name": "Косяк",
+    "father_name": "Олегович",
+    "id": 4,
+    "phone": "79990001122",
+    "telegram": "pngn",
+    "email": "antarctica@gmail.com",
+    "git": "iampngn"
+  },
+  {
+    "last_name": "Голубев",
+    "first_name": "Доброжир",
+    "father_name": "Братиславович",
+    "id": 5,
+    "email": "gold@mail.ru",
+    "git": "zhirbrother"
+  }
+]
