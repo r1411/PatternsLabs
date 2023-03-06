@@ -38,12 +38,14 @@ class Student extends StudentBase {
     -first_name: String
     -father_name: String
     --
+    +{static}from_hash(Hash): Student
     +{static}from_json_str(String): Student
     +initialize(String, String, String, Hash)
     +set_contacts(Hash)
     +last_name_and_initials(): String
     +short_info(): String
     +to_s(): String
+    +to_hash(): Hash
     +to_json_str(): String
     .. Геттеры ..
     +phone(): String

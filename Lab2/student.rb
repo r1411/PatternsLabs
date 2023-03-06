@@ -7,16 +7,20 @@ class Student < StudentBase
   # Делаем new предка публичным
   public_class_method :new
 
+  def self.from_hash(hash)
+    raise ArgumentError, 'Fields required: fist_name, last_name, father_name' unless hash.key?(:first_name) && hash.key?(:last_name) && hash.key?(:father_name)
+
+    first_name = hash.delete(:first_name)
+    last_name = hash.delete(:last_name)
+    father_name = hash.delete(:father_name)
+
+    Student.new(first_name, last_name, father_name, **hash)
+  end
+
   # Конструктор из JSON строки
   def self.from_json_str(str)
-    params = JSON.parse(str)
-    raise ArgumentError, 'Fields required: fist_name, last_name, father_name' unless params.key?('first_name') && params.key?('last_name') && params.key?('father_name')
-
-    first_name = params.delete('first_name')
-    last_name = params.delete('last_name')
-    father_name = params.delete('father_name')
-
-    Student.new(first_name, last_name, father_name, **params.transform_keys(&:to_sym))
+    params = JSON.parse(str, { symbolize_names: true })
+    from_hash(params)
   end
 
   # Делаем публичными геттеры и сеттеры базового класса
@@ -83,12 +87,16 @@ class Student < StudentBase
     result
   end
 
-  def to_json_str
+  def to_hash
     attrs = {}
     %i[last_name first_name father_name id phone telegram email git].each do |attr|
       attr_val = send(attr)
       attrs[attr] = attr_val unless attr_val.nil?
     end
-    JSON.generate(attrs)
+    attrs
+  end
+
+  def to_json_str
+    JSON.generate(to_hash)
   end
 end

@@ -23,12 +23,12 @@ class StudentShort < StudentBase
 
   # Стандартный конструктор
   def initialize(id, info_str)
-    params = JSON.parse(info_str).transform_keys(&:to_sym)
+    params = JSON.parse(info_str, { symbolize_names: true })
     raise ArgumentError, 'Fields required: last_name_and_initials' if !params.key?(:last_name_and_initials) || params[:last_name_and_initials].nil?
 
     self.id = id
     self.last_name_and_initials = params[:last_name_and_initials]
-    self.contact = params[:contact].transform_keys(&:to_sym)
+    self.contact = params[:contact]
     self.git = params[:git]
 
     options = {}
