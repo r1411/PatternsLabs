@@ -34,7 +34,7 @@ class StudentShort < StudentBase
     options = {}
     options[:id] = id
     options[:git] = git
-    options[contact[:type].to_sym] = contact[:value]
+    options[contact[:type].to_sym] = contact[:value] if contact
     super(**options)
   end
 
