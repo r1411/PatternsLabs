@@ -34,6 +34,11 @@ class DataList
     DataTable.new(result)
   end
 
+  # Добавить элементы в конец списка
+  def append(*objects)
+    self.objects.append(*objects)
+  end
+
   protected
 
   # Список значений полей для DataTable. Переопределить в наследниках
