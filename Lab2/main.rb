@@ -5,6 +5,7 @@ require_relative 'student_short'
 require_relative 'data_table'
 require_relative 'data_list_student_short'
 require_relative 'students_list_json'
+require_relative 'students_list_yaml'
 require 'json'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
@@ -147,3 +148,17 @@ pages_count = (stud_list_json.student_count / 2.0).ceil
     puts
   end
 end
+
+puts '--------------------------------'
+puts 'Тест StudentsListYAML:'
+
+stud_list_yaml = StudentsListYAML.new
+stud_list_yaml.add_student(student1)
+stud_list_yaml.add_student(student2)
+stud_list_yaml.add_student(student3)
+stud_list_yaml.add_student(student4)
+stud_list_yaml.add_student(student5)
+
+stud_list_yaml.save_to_file('./Lab2/test_data/students.yaml')
+stud_list_yaml.load_from_file('./Lab2/test_data/students.yaml')
+puts "Успешно записано и прочитано #{stud_list_yaml.student_count} студентов"

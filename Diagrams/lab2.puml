@@ -154,4 +154,11 @@ class StudentsListJSON extends StudentsListBase {
     #hash_list_to_str(Array): String
 }
 
+class StudentsListYAML extends StudentsListBase {
+    --
+    +initialize()
+    #str_to_hash_list(String): Array
+    #hash_list_to_str(Array): String
+}
+
 @enduml
