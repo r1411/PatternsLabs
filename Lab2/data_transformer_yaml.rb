@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'students_list_base'
+require_relative 'data_transformer_base'
 require 'yaml'
 
-class StudentsListYAML < StudentsListBase
+class DataTransformerYAML < DataTransformerBase
   public_class_method :new
-
-  protected
 
   def str_to_hash_list(str)
     YAML.safe_load(str).map { |h| h.transform_keys(&:to_sym) }

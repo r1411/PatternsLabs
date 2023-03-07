@@ -1,22 +1,23 @@
 # frozen_string_literal: true
 
-class StudentsListBase
-  private_class_method :new
+class StudentsList
+  attr_writer :data_transformer
 
-  def initialize
+  def initialize(data_transformer)
     self.students = []
     self.seq_id = 1
+    self.data_transformer = data_transformer
   end
 
   def load_from_file(file_path)
-    hash_list = str_to_hash_list(File.read(file_path))
+    hash_list = data_transformer.str_to_hash_list(File.read(file_path))
     self.students = hash_list.map { |h| Student.from_hash(h) }
     update_seq_id
   end
 
   def save_to_file(file_path)
     hash_list = students.map(&:to_hash)
-    File.write(file_path, hash_list_to_str(hash_list))
+    File.write(file_path, data_transformer.hash_list_to_str(hash_list))
   end
 
   def student_by_id(student_id)
@@ -56,13 +57,6 @@ class StudentsListBase
     students.count
   end
 
-  protected
-
-  # Методы работы с файлами. Переопределить в потомках.
-  def str_to_hash_list(str); end
-
-  def hash_list_to_str(hash_list); end
-
   private
 
   # Метод для актуализации seq_id
@@ -70,5 +64,6 @@ class StudentsListBase
     self.seq_id = students.max_by(&:id).id + 1
   end
 
+  attr_reader :data_transformer
   attr_accessor :students, :seq_id
 end

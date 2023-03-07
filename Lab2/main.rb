@@ -4,8 +4,9 @@ require_relative 'student'
 require_relative 'student_short'
 require_relative 'data_table'
 require_relative 'data_list_student_short'
-require_relative 'students_list_json'
-require_relative 'students_list_yaml'
+require_relative 'students_list'
+require_relative 'data_transformer_json'
+require_relative 'data_transformer_yaml'
 require 'json'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
@@ -116,9 +117,9 @@ short_list.objects = []
 puts short_list.data_table
 
 puts '--------------------------------'
-puts 'Тест StudentsListJSON:'
+puts 'Тест StudentsList (JSON):'
 
-stud_list_json = StudentsListJSON.new
+stud_list_json = StudentsList.new(DataTransformerJSON.new)
 stud_list_json.add_student(student1)
 stud_list_json.add_student(student2)
 stud_list_json.add_student(student3)
@@ -150,9 +151,9 @@ pages_count = (stud_list_json.student_count / 2.0).ceil
 end
 
 puts '--------------------------------'
-puts 'Тест StudentsListYAML:'
+puts 'Тест StudentsList (YAML):'
 
-stud_list_yaml = StudentsListYAML.new
+stud_list_yaml = StudentsList.new(DataTransformerYAML.new)
 stud_list_yaml.add_student(student1)
 stud_list_yaml.add_student(student2)
 stud_list_yaml.add_student(student3)

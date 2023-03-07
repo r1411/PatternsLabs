@@ -2,6 +2,7 @@
 'https://plantuml.com/class-diagram
 
 DataList ..> DataTable
+StudentsList *-- DataTransformerBase
 
 abstract class StudentBase {
     -id: Integer
@@ -122,9 +123,10 @@ class DataListStudentShort extends DataList {
     #table_fields(StudentShort): Array
 }
 
-abstract class StudentsListBase {
+abstract class StudentsList {
     -students: Array
     -seq_id: Integer
+    -data_transformer: DataTransformerBase
     --
     -initialize()
     +load_from_file(String)
@@ -136,29 +138,36 @@ abstract class StudentsListBase {
     +replace_student(Integer, Student)
     +remove_student(Integer)
     +student_count(): Integer
-    #str_to_hash_list(String): Array
-    #hash_list_to_str(Array): String
     -update_seq_id()
     .. Геттеры ..
     -students(): Array
     -seq_id(): Integer
+    -data_transformer(): DataTransformerBase
     .. Сеттеры ..
     -students=(Array)
     -seq_id=(Integer)
+    +data_transformer=(DataTransformerBase)
 }
 
-class StudentsListJSON extends StudentsListBase {
+class DataTransformerBase {
     --
-    +initialize()
-    #str_to_hash_list(String): Array
-    #hash_list_to_str(Array): String
+    -initialize()
+    #str_to_hash_list(String)
+    #hash_list_to_str(Array)
 }
 
-class StudentsListYAML extends StudentsListBase {
+class DataTransformerJSON extends DataTransformerBase {
     --
     +initialize()
-    #str_to_hash_list(String): Array
-    #hash_list_to_str(Array): String
+    +str_to_hash_list(String): Array
+    +hash_list_to_str(Array): String
+}
+
+class DataTransformerYAML extends DataTransformerBase {
+    --
+    +initialize()
+    +str_to_hash_list(String): Array
+    +hash_list_to_str(Array): String
 }
 
 @enduml

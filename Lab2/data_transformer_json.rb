@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'students_list_base'
+require_relative 'data_transformer_base'
 require 'json'
 
-class StudentsListJSON < StudentsListBase
+class DataTransformerJSON < DataTransformerBase
   public_class_method :new
-
-  protected
 
   def str_to_hash_list(str)
     JSON.parse(str, { symbolize_names: true })
