@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'student'
-require_relative 'student_short'
-require_relative 'data_table'
-require_relative 'data_list_student_short'
-require_relative 'students_list'
-require_relative 'data_transformer_json'
-require_relative 'data_transformer_yaml'
+require_relative 'models/student'
+require_relative 'models/student_short'
+require_relative 'repositories/containers/data_table'
+require_relative 'repositories/containers/data_list_student_short'
+require_relative 'repositories/students_list'
+require_relative 'repositories/transformers/data_transformer_json'
+require_relative 'repositories/transformers/data_transformer_yaml'
 require 'json'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
@@ -125,9 +125,9 @@ stud_list_json.add_student(student2)
 stud_list_json.add_student(student3)
 stud_list_json.add_student(student4)
 stud_list_json.add_student(student5)
-stud_list_json.save_to_file('./Lab2/test_data/students.json')
+stud_list_json.save_to_file('./LabStudents/test_data/students.json')
 
-stud_list_json.load_from_file('./Lab2/test_data/students.json')
+stud_list_json.load_from_file('./LabStudents/test_data/students.json')
 
 puts "Успешно записано и прочитано #{stud_list_json.student_count} студентов:"
 
@@ -160,6 +160,6 @@ stud_list_yaml.add_student(student3)
 stud_list_yaml.add_student(student4)
 stud_list_yaml.add_student(student5)
 
-stud_list_yaml.save_to_file('./Lab2/test_data/students.yaml')
-stud_list_yaml.load_from_file('./Lab2/test_data/students.yaml')
+stud_list_yaml.save_to_file('./LabStudents/test_data/students.yaml')
+stud_list_yaml.load_from_file('./LabStudents/test_data/students.yaml')
 puts "Успешно записано и прочитано #{stud_list_yaml.student_count} студентов"
