@@ -3,6 +3,8 @@
 
 DataList ..> DataTable
 StudentsList *-- DataTransformerBase
+StudentsList ..> DataListStudentShort
+DataListStudentShort o-- ShortStudent
 
 abstract class StudentBase {
     -id: Integer
