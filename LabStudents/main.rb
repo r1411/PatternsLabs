@@ -8,6 +8,8 @@ require_relative 'repositories/students_list'
 require_relative 'repositories/transformers/data_transformer_json'
 require_relative 'repositories/transformers/data_transformer_yaml'
 require 'json'
+require 'yaml'
+require 'mysql2'
 
 student1 = Student.new('Иванов', 'Иван', 'Иванович')
 student2 = Student.new('Сараев', 'Поджог', 'Равшанович', id: 1, telegram: 'nightfire')
@@ -163,3 +165,11 @@ stud_list_yaml.add_student(student5)
 stud_list_yaml.save_to_file('./LabStudents/test_data/students.yaml')
 stud_list_yaml.load_from_file('./LabStudents/test_data/students.yaml')
 puts "Успешно записано и прочитано #{stud_list_yaml.student_count} студентов"
+
+puts '--------------------------------'
+puts 'Тест подключения к БД:'
+
+db_conf = YAML.load_file('./LabStudents/db_config/config.yaml').transform_keys(&:to_sym)
+client = Mysql2::Client.new(db_conf)
+results = client.query("SELECT * FROM student")
+results.each { |row| puts row }
