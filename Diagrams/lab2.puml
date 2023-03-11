@@ -125,7 +125,7 @@ class DataListStudentShort extends DataList {
     #table_fields(StudentShort): Array
 }
 
-abstract class StudentsList {
+class StudentsList {
     -students: Array
     -seq_id: Integer
     -data_transformer: DataTransformerBase
