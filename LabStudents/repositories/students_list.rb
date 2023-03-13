@@ -43,6 +43,7 @@ class StudentsList
     student.id = seq_id
     students << student
     self.seq_id += 1
+    student.id
   end
 
   def replace_student(student_id, student)

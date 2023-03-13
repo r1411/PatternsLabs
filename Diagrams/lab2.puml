@@ -136,7 +136,7 @@ class StudentsList {
     +student_by_id(Integer): Student
     +paginated_short_students(Integer, Integer, DataList: nil): DataList
     +sorted(): Array
-    +add_student(Student)
+    +add_student(Student): Integer
     +replace_student(Integer, Student)
     +remove_student(Integer)
     +student_count(): Integer
