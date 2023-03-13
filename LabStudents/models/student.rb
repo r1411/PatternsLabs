@@ -14,7 +14,7 @@ class Student < StudentBase
     last_name = hash.delete(:last_name)
     father_name = hash.delete(:father_name)
 
-    Student.new(first_name, last_name, father_name, **hash)
+    Student.new(last_name, first_name, father_name, **hash)
   end
 
   # Конструктор из JSON строки
