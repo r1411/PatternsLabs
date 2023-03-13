@@ -130,7 +130,7 @@ class StudentsList {
     -seq_id: Integer
     -data_transformer: DataTransformerBase
     --
-    -initialize()
+    +initialize()
     +load_from_file(String)
     +save_to_file(String)
     +student_by_id(Integer): Student
@@ -170,6 +170,22 @@ class DataTransformerYAML extends DataTransformerBase {
     +initialize()
     +str_to_hash_list(String): Array
     +hash_list_to_str(Array): String
+}
+
+class StudentsListDB {
+    -client: Mysql2::Client
+    --
+    +initialize()
+    +student_by_id(Integer): Student
+    +paginated_short_students(Integer, Integer, DataList: nil): DataList
+    +add_student(Student): Integer
+    +replace_student(Integer, Student)
+    +remove_student(Integer)
+    +student_count(): Integer
+    .. Геттеры ..
+    -students(): Mysql2::Client
+    .. Сеттеры ..
+    -students=(Mysql2::Client)
 }
 
 @enduml

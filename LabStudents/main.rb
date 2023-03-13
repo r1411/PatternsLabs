@@ -7,6 +7,7 @@ require_relative 'repositories/containers/data_list_student_short'
 require_relative 'repositories/students_list'
 require_relative 'repositories/transformers/data_transformer_json'
 require_relative 'repositories/transformers/data_transformer_yaml'
+require_relative 'repositories/students_list_db'
 require 'json'
 require 'yaml'
 require 'mysql2'
@@ -170,6 +171,13 @@ puts '--------------------------------'
 puts 'Тест подключения к БД:'
 
 db_conf = YAML.load_file('./LabStudents/db_config/config.yaml').transform_keys(&:to_sym)
-client = Mysql2::Client.new(db_conf)
-results = client.query("SELECT * FROM student")
-results.each { |row| puts row }
+stud_db = StudentsListDB.new(db_conf)
+puts stud_db.student_by_id(5)
+puts stud_db.paginated_short_students(2, 2).inspect
+
+# Работает, обещаю, но запускать каждый раз я это не буду:
+# added_id = stud_db.add_student(student4).inspect
+# stud_db.replace_student(added_id, student3)
+# stud_db.remove_student(added_id)
+
+puts "Студентов в БД: #{stud_db.student_count}"
