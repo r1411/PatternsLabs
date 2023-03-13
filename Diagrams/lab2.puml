@@ -5,6 +5,7 @@ DataList ..> DataTable
 StudentsList *-- DataTransformerBase
 StudentsList ..> DataListStudentShort
 DataListStudentShort o-- ShortStudent
+StudentsListDB o-- DBUniversity
 
 abstract class StudentBase {
     -id: Integer
@@ -172,8 +173,19 @@ class DataTransformerYAML extends DataTransformerBase {
     +hash_list_to_str(Array): String
 }
 
-class StudentsListDB {
+class DBUniversity {
+    -instance_mutex: Mutex
+    -instance: DBUniversity
     -client: Mysql2::Client
+    --
+    +{static}instance(): DBUniversity
+    -initialize()
+    +prepare_exec(String, *Object): Mysql2::Result
+    +query(String): Mysql2::Result
+}
+
+class StudentsListDB {
+    -db: DBUniversity
     --
     +initialize()
     +student_by_id(Integer): Student
@@ -183,9 +195,9 @@ class StudentsListDB {
     +remove_student(Integer)
     +student_count(): Integer
     .. Геттеры ..
-    -students(): Mysql2::Client
+    -db(): DBUniversity
     .. Сеттеры ..
-    -students=(Mysql2::Client)
+    -db=(DBUniversity)
 }
 
 @enduml
