@@ -151,8 +151,8 @@ class DataTransformerYAML extends DataTransformerBase {
 }
 
 class DBDataSource {
-    -instance_mutex: Mutex
-    -instance: DBDataSource
+    -{static}instance_mutex: Mutex
+    -{static}instance: DBDataSource
     -client: Mysql2::Client
     --
     +{static}instance(): DBDataSource
