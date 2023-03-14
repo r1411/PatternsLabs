@@ -3,7 +3,7 @@
 
 DataList ..> DataTable
 FileDataSource *-- DataTransformerBase
-FileDataSource ..> DataListStudentShort
+StudentRepository ..> DataListStudentShort
 DataListStudentShort o-- ShortStudent
 DBSourceAdapter o-- DBDataSource
 FileSourceAdapter o-- FileDataSource
