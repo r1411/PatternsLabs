@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class StudentsList
+class FileDataSource
   attr_writer :data_transformer
 
   def initialize(data_transformer)
@@ -25,7 +25,7 @@ class StudentsList
   end
 
   # Получить page по счету count элементов (страница начинается с 1)
-  def paginated_short_students(page, count, existing_data_list: nil)
+  def paginated_short_students(page, count, existing_data_list = nil)
     offset = (page - 1) * count
     slice = students[offset, count].map { |s| StudentShort.from_student(s) }
 
@@ -47,7 +47,7 @@ class StudentsList
   end
 
   def replace_student(student_id, student)
-    idx = student.find_index { |s| s.id == student_id }
+    idx = students.find_index { |s| s.id == student_id }
     students[idx] = student
   end
 

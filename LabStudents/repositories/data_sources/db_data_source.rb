@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DBUniversity
+class DBDataSource
   private_class_method :new
   @instance_mutex = Mutex.new
 

@@ -4,10 +4,12 @@ require_relative 'models/student'
 require_relative 'models/student_short'
 require_relative 'repositories/containers/data_table'
 require_relative 'repositories/containers/data_list_student_short'
-require_relative 'repositories/students_list'
-require_relative 'repositories/transformers/data_transformer_json'
-require_relative 'repositories/transformers/data_transformer_yaml'
-require_relative 'repositories/students_list_db'
+require_relative 'repositories/data_sources/file_data_source'
+require_relative 'repositories/data_sources/transformers/data_transformer_json'
+require_relative 'repositories/data_sources/transformers/data_transformer_yaml'
+require_relative 'repositories/student_repository'
+require_relative 'repositories/adapters/file_source_adapter'
+require_relative 'repositories/adapters/db_source_adapter'
 require 'json'
 require 'yaml'
 require 'mysql2'
@@ -120,63 +122,39 @@ short_list.objects = []
 puts short_list.data_table
 
 puts '--------------------------------'
-puts 'Тест StudentsList (JSON):'
-
-stud_list_json = StudentsList.new(DataTransformerJSON.new)
-stud_list_json.add_student(student1)
-stud_list_json.add_student(student2)
-stud_list_json.add_student(student3)
-stud_list_json.add_student(student4)
-stud_list_json.add_student(student5)
-stud_list_json.save_to_file('./LabStudents/test_data/students.json')
-
-stud_list_json.load_from_file('./LabStudents/test_data/students.json')
-
-puts "Успешно записано и прочитано #{stud_list_json.student_count} студентов:"
-
-1.upto(stud_list_json.student_count).each { |id| puts stud_list_json.student_by_id(id) }
-
-puts 'Вывод студентов по страницам из 2х человек: '
-pages_count = (stud_list_json.student_count / 2.0).ceil
-1.upto(pages_count) do |page|
-  puts "Страница #{page} / #{pages_count}:"
-  page_data = stud_list_json.paginated_short_students(page, 2)
-  print('id'.ljust(50))
-  page_data.column_names.each { |col_name| print col_name.ljust(50) }
-  puts
-  table = page_data.data_table
-  (0...table.rows_count).each do |row|
-    (0...short_table.cols_count).each do |col|
-      print table.get_item(row, col).to_s.ljust(50)
-    end
-    puts
-  end
+def test_repository(student_rep)
+  puts "В репозитории #{student_rep.student_count} студентов."
+  puts "Студент с id=1: #{student_rep.student_by_id(1)}"
+  test_student = Student.new('Арабов', 'Адам', 'Анатольевич', telegram: 'adam_arabov', git: 'arab_dev')
+  puts "Добавляем студента: #{test_student}"
+  added_id = student_rep.add_student(test_student)
+  puts "Добавили. Теперь студентов #{student_rep.student_count}. Его id: #{added_id}. Пробуем получить: "
+  puts student_rep.student_by_id(added_id)
+  test_student.telegram = 'ne_otdam_arabov'
+  puts 'Заменяем телеграм студента...'
+  student_rep.replace_student(added_id, test_student)
+  puts student_rep.student_by_id(added_id)
+  puts "Удаляем студента с id=#{added_id}..."
+  student_rep.remove_student(added_id)
+  puts "Удалили. Теперь студентов #{student_rep.student_count}"
+  puts 'Тест пагинации: '
+  puts 'Страница 1:'
+  puts student_rep.paginated_short_students(1, 3).data_table.inspect
+  puts 'Страница 2:'
+  puts student_rep.paginated_short_students(2, 3).data_table.inspect
 end
 
-puts '--------------------------------'
-puts 'Тест StudentsList (YAML):'
+puts
+puts '=> Тест StudentRepository (JSON) <='
+rep_json = StudentRepository.new(FileSourceAdapter.new(DataTransformerJSON.new, './LabStudents/test_data/students.json'))
+test_repository(rep_json)
 
-stud_list_yaml = StudentsList.new(DataTransformerYAML.new)
-stud_list_yaml.add_student(student1)
-stud_list_yaml.add_student(student2)
-stud_list_yaml.add_student(student3)
-stud_list_yaml.add_student(student4)
-stud_list_yaml.add_student(student5)
+puts
+puts '=> Тест StudentRepository (YAML) <='
+rep_yaml = StudentRepository.new(FileSourceAdapter.new(DataTransformerYAML.new, './LabStudents/test_data/students.yaml'))
+test_repository(rep_yaml)
 
-stud_list_yaml.save_to_file('./LabStudents/test_data/students.yaml')
-stud_list_yaml.load_from_file('./LabStudents/test_data/students.yaml')
-puts "Успешно записано и прочитано #{stud_list_yaml.student_count} студентов"
-
-puts '--------------------------------'
-puts 'Тест подключения к БД:'
-
-stud_db = StudentsListDB.new
-puts stud_db.student_by_id(5)
-puts stud_db.paginated_short_students(2, 2).inspect
-
-# Работает, обещаю, но запускать каждый раз я это не буду:
-# added_id = stud_db.add_student(student4).inspect
-# stud_db.replace_student(added_id, student3)
-# # stud_db.remove_student(added_id)
-
-puts "Студентов в БД: #{stud_db.student_count}"
+puts
+puts '=> Тест StudentRepository (DB) <='
+rep_yaml = StudentRepository.new(DBSourceAdapter.new)
+test_repository(rep_yaml)

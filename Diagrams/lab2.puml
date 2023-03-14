@@ -2,10 +2,13 @@
 'https://plantuml.com/class-diagram
 
 DataList ..> DataTable
-StudentsList *-- DataTransformerBase
-StudentsList ..> DataListStudentShort
+FileDataSource *-- DataTransformerBase
+FileDataSource ..> DataListStudentShort
 DataListStudentShort o-- ShortStudent
-StudentsListDB o-- DBUniversity
+DBSourceAdapter o-- DBDataSource
+FileSourceAdapter o-- FileDataSource
+StudentRepository *-- DBSourceAdapter
+StudentRepository *-- FileSourceAdapter
 
 abstract class StudentBase {
     -id: Integer
@@ -126,32 +129,6 @@ class DataListStudentShort extends DataList {
     #table_fields(StudentShort): Array
 }
 
-class StudentsList {
-    -students: Array
-    -seq_id: Integer
-    -data_transformer: DataTransformerBase
-    --
-    +initialize()
-    +load_from_file(String)
-    +save_to_file(String)
-    +student_by_id(Integer): Student
-    +paginated_short_students(Integer, Integer, DataList: nil): DataList
-    +sorted(): Array
-    +add_student(Student): Integer
-    +replace_student(Integer, Student)
-    +remove_student(Integer)
-    +student_count(): Integer
-    -update_seq_id()
-    .. Геттеры ..
-    -students(): Array
-    -seq_id(): Integer
-    -data_transformer(): DataTransformerBase
-    .. Сеттеры ..
-    -students=(Array)
-    -seq_id=(Integer)
-    +data_transformer=(DataTransformerBase)
-}
-
 class DataTransformerBase {
     --
     -initialize()
@@ -173,31 +150,79 @@ class DataTransformerYAML extends DataTransformerBase {
     +hash_list_to_str(Array): String
 }
 
-class DBUniversity {
+class DBDataSource {
     -instance_mutex: Mutex
-    -instance: DBUniversity
+    -instance: DBDataSource
     -client: Mysql2::Client
     --
-    +{static}instance(): DBUniversity
+    +{static}instance(): DBDataSource
     -initialize()
     +prepare_exec(String, *Object): Mysql2::Result
     +query(String): Mysql2::Result
 }
 
-class StudentsListDB {
-    -db: DBUniversity
+class FileDataSource {
+    -students: Array
+    -seq_id: Integer
+    -data_transformer: DataTransformerBase
     --
     +initialize()
+    +load_from_file(String)
+    +save_to_file(String)
     +student_by_id(Integer): Student
-    +paginated_short_students(Integer, Integer, DataList: nil): DataList
+    +paginated_short_students(Integer, Integer, DataList=nil): DataList
+    +sorted(): Array
     +add_student(Student): Integer
     +replace_student(Integer, Student)
     +remove_student(Integer)
     +student_count(): Integer
+    -update_seq_id()
     .. Геттеры ..
-    -db(): DBUniversity
+    -students(): Array
+    -seq_id(): Integer
+    -data_transformer(): DataTransformerBase
     .. Сеттеры ..
-    -db=(DBUniversity)
+    -students=(Array)
+    -seq_id=(Integer)
+    +data_transformer=(DataTransformerBase)
+}
+
+class DBSourceAdapter {
+    -db: DBDataSource
+    --
+    +initialize()
+    +student_by_id(Integer): Student
+    +paginated_short_students(Integer, Integer, DataList=nil): DataList
+    +add_student(Student): Integer
+    +replace_student(Integer, Student)
+    +remove_student(Integer)
+    +student_count(): Integer
+    -student_fields(Student): Array
+}
+
+class FileSourceAdapter {
+    -file_path: String
+    -file_source: FileDataSource
+    --
+    +initialize(DataTransformerBase, String)
+    +student_by_id(Integer): Student
+    +paginated_short_students(Integer, Integer, DataList=nil): DataList
+    +add_student(Student): Integer
+    +replace_student(Integer, Student)
+    +remove_student(Integer)
+    +student_count(): Integer
+}
+
+class StudentRepository {
+    -data_source_adapter
+    --
+    +initialize(data_source_adapter)
+    +student_by_id(Integer): Student
+    +paginated_short_students(Integer, Integer, DataList=nil): DataList
+    +add_student(Student): Integer
+    +replace_student(Integer, Student)
+    +remove_student(Integer)
+    +student_count(): Integer
 }
 
 @enduml
