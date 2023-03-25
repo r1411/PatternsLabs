@@ -225,4 +225,9 @@ class StudentRepository {
     +student_count(): Integer
 }
 
+class MainWindow {
+    --
+    +create(): Window
+}
+
 @enduml
