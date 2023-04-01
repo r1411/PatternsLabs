@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'gui/main_window'
+require_relative 'views/main_window'
 
-main_window = MainWindow.new.create
-main_window.show
+MainWindow.new.create.show
 

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'mysql2'
+
 class DBDataSource
   private_class_method :new
   @instance_mutex = Mutex.new

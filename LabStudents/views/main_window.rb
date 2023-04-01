@@ -5,11 +5,16 @@ require_relative 'tab_students'
 
 class MainWindow
   include Glimmer
+
+  def initialize
+    @view_tab_students = TabStudents.new
+  end
+
   def create
     window('Универ', 600, 200) {
       tab {
         tab_item('Студенты') {
-          tab_students
+          @view_tab_students.create
         }
 
         tab_item('Вкладка 2') { }
