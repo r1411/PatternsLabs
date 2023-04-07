@@ -31,7 +31,7 @@ class FileDataSource
 
     return DataListStudentShort.new(slice) if existing_data_list.nil?
 
-    existing_data_list.append(*slice)
+    existing_data_list.replace_objects(slice)
     existing_data_list
   end
 

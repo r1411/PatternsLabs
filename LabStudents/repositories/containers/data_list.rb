@@ -35,8 +35,8 @@ class DataList
   end
 
   # Добавить элементы в конец списка
-  def append(*objects)
-    self.objects.append(*objects)
+  def replace_objects(objects)
+    self.objects = objects.dup
   end
 
   protected
