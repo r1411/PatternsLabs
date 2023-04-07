@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require './LabStudents/models/student'
+require './LabStudents/models/student_short'
+require './LabStudents/repositories/containers/data_list_student_short'
+
 class FileDataSource
   attr_writer :data_transformer
 
