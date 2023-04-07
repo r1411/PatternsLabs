@@ -2,15 +2,31 @@
 
 require 'glimmer-dsl-libui'
 require './LabStudents/controllers/tab_students_controller'
+require './LabStudents/events/event_manager'
+require './LabStudents/events/impl/event_update_students_table'
+
 class TabStudents
   include Glimmer
 
+  STUDENTS_PER_PAGE = 20
+
   def initialize
     @controller = TabStudentsController.new(self)
+    @current_page = 1
   end
 
   def on_create
-    
+    EventManager.subscribe(self, EventUpdateStudentsTable)
+    @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+  end
+
+  def on_event(event)
+    case event
+    when EventUpdateStudentsTable
+      puts event.new_table.to_2d_array
+      # TODO: обновление столбцов сделать динамически здесь
+      @table.model_array = event.new_table.to_2d_array
+    end
   end
 
   def create
@@ -57,17 +73,15 @@ class TabStudents
 
       # Секция 2
       vertical_box {
-        @table = table {
-
-          text_column('Фамилия И. О.')
-          text_column('Гит')
-          text_column('Контакт')
-
-          editable false
-
-          # TODO: тестовые данные, удалить когда будут реальные
-          cell_rows [['Иванов И. И.', 'iii_dev', '+79995557722'], ['Надоев А. А.', nil, '@milka123'], ['Обоев Р. Р.', 'rulon_dev', 'oboi@mail.ru'], ['Анонимов А. А.', nil, nil]]
-        }
+        @table = refined_table(
+          table_editable: false,
+          table_columns: {
+            '#' => :text,
+            'Гит' => :text,
+            'Контакт' => :text,
+            'Фамилия И. О' => :text
+          }
+        )
 
         @pages = horizontal_box {
           stretchy false

@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require './LabStudents/repositories/containers/data_table'
+require './LabStudents/events/event_manager'
+require './LabStudents/events/impl/event_update_students_table'
+
 class DataList
   # Это "абстрактный" класс
   private_class_method :new
@@ -37,6 +41,7 @@ class DataList
   # Добавить элементы в конец списка
   def replace_objects(objects)
     self.objects = objects.dup
+    EventManager.notify(EventUpdateStudentsTable.new(data_table, column_names))
   end
 
   protected

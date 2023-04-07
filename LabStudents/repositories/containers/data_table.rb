@@ -20,6 +20,10 @@ class DataTable
     table[row][col].dup
   end
 
+  def to_2d_array
+    table.dup
+  end
+
   def to_s
     "DataTable (#{rows_count}x#{cols_count})"
   end
