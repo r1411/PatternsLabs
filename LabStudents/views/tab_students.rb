@@ -26,11 +26,25 @@ class TabStudents
   def on_event(event)
     case event
     when EventUpdateStudentsTable
-      # TODO: обновление столбцов сделать динамически здесь
-      @table.model_array = event.new_table.to_2d_array
+      arr = event.new_table.to_2d_array
+      arr.map { |row| row[3] = [row[3][:value], contact_color(row[3][:type])] }
+      @table.model_array = arr
     when EventUpdateStudentsCount
       @total_count = event.new_count
       @page_label.text = "#{@current_page} / #{(@total_count / STUDENTS_PER_PAGE.to_f).ceil}"
+    end
+  end
+
+  def contact_color(type)
+    case type
+    when 'telegram'
+      '#00ADB5'
+    when 'email'
+      '#F08A5D'
+    when 'phone'
+      '#B83B5E'
+    else
+      '#000000'
     end
   end
 
@@ -82,9 +96,9 @@ class TabStudents
           table_editable: false,
           table_columns: {
             '#' => :text,
+            'Фамилия И. О' => :text,
             'Гит' => :text,
-            'Контакт' => :text,
-            'Фамилия И. О' => :text
+            'Контакт' => :text_color
           }
         )
 
