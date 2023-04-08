@@ -4,6 +4,7 @@ require 'glimmer-dsl-libui'
 require './LabStudents/controllers/tab_students_controller'
 require './LabStudents/events/event_manager'
 require './LabStudents/events/impl/event_update_students_table'
+require './LabStudents/events/impl/event_update_students_count'
 
 class TabStudents
   include Glimmer
@@ -17,15 +18,17 @@ class TabStudents
 
   def on_create
     EventManager.subscribe(self, EventUpdateStudentsTable)
+    EventManager.subscribe(self, EventUpdateStudentsCount)
     @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
   end
 
   def on_event(event)
     case event
     when EventUpdateStudentsTable
-      puts event.new_table.to_2d_array
       # TODO: обновление столбцов сделать динамически здесь
       @table.model_array = event.new_table.to_2d_array
+    when EventUpdateStudentsCount
+      @page_label.text = "#{@current_page} / #{(event.new_count / STUDENTS_PER_PAGE.to_f).ceil}"
     end
   end
 
@@ -86,11 +89,9 @@ class TabStudents
         @pages = horizontal_box {
           stretchy false
 
-          button('1')
-          button('2')
-          button('3')
-          label('...') { stretchy false }
-          button('15')
+          button("<") { stretchy true }
+          @page_label = label("...") { stretchy false }
+          button(">") { stretchy true }
         }
       }
 
