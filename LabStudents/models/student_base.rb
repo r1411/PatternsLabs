@@ -44,7 +44,7 @@ class StudentBase
   # Краткая информация о первом доступном контакте пользователя
   def short_contact
     contact = {}
-    %i[telegram email git].each do |attr|
+    %i[telegram email phone].each do |attr|
       attr_val = send(attr)
       next if attr_val.nil?
 
