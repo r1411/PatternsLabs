@@ -6,10 +6,19 @@ require './LabStudents/repositories/adapters/db_source_adapter'
 require './LabStudents/repositories/containers/data_list_student_short'
 require './LabStudents/events/event_manager'
 require './LabStudents/events/impl/event_update_students_count'
+require 'win32api'
 
 class TabStudentsController
   def initialize(view)
-    @student_rep = StudentRepository.new(DBSourceAdapter.new)
+    begin
+      @student_rep = StudentRepository.new(DBSourceAdapter.new)
+    rescue Mysql2::Error::ConnectionError
+      api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
+      api.call(0, "No connection to DB", "Error", 0)
+      # TODO: Возможность переключения на JSON помимо exit
+      exit(false)
+      return
+    end
     @view = view
     @data_list = DataListStudentShort.new([])
   end
