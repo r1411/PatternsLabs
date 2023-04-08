@@ -10,6 +10,15 @@ FileSourceAdapter o-- FileDataSource
 StudentRepository *-- DBSourceAdapter
 StudentRepository *-- FileSourceAdapter
 
+MainWindow *-- TabStudents
+TabStudents *-- TabStudentsController
+TabStudentsController *-- TabStudents
+TabStudentsController o-- StudentRepository
+TabStudentsController o-- DataListStudentShort
+
+EventManager ..> EventUpdateStudentsCount
+EventManager ..> EventUpdateStudentsTable
+
 abstract class StudentBase {
     -id: Integer
     -phone: String
@@ -94,6 +103,7 @@ class DataTable {
     --
     +initialize(Array)
     +get_item(Integer, Integer): Object
+    +to_2d_array(): Array
     .. Геттеры ..
     +rows_count(): Integer
     +cols_count(): Integer
@@ -112,6 +122,7 @@ abstract class DataList {
     +select_element(Integer)
     +data_table(): DataTable
     +selected_id(): Integer
+    +replace_objects(Array)
     #column_names(): Array
     #table_fields(Object): Array
     .. Геттеры ..
@@ -228,6 +239,45 @@ class StudentRepository {
 class MainWindow {
     --
     +create(): Window
+}
+
+class TabStudents {
+    -controller: TabStudentsController
+    -current_page: Integer
+    -total_count: Integer
+    --
+    +create(): HorizontalBox
+}
+
+class TabStudentsController {
+    -students_rep: StudentRepository
+    -view: TabStudents
+    -data_list: DataListStudentShort
+    --
+    +show_view()
+    +refresh_data(Integer, Integer)
+}
+
+class EventManager {
+    -observers: Hash
+    --
+    +subscribe(Object, Class)
+    +unsubscribe(Object, Class)
+    +notify(event)
+}
+
+class EventUpdateStudentsCount {
+    -new_count
+    --
+    +new_count(): Integer
+}
+
+class EventUpdateStudentsTable {
+    -new_table: DataTable
+    -column_names: Array
+    --
+    +new_table(): DataTable
+    +column_names(): Array
 }
 
 @enduml
