@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require './LabStudents/repositories/containers/data_table'
-require './LabStudents/events/event_manager'
-require './LabStudents/events/impl/event_update_students_table'
 
 class DataList
   # Это "абстрактный" класс
@@ -13,6 +11,19 @@ class DataList
   # Конструктор, принимает массив любых объектов
   def initialize(objects)
     self.objects = objects
+    @listeners = []
+  end
+
+  def add_listener(listener)
+    @listeners << listener
+  end
+
+  def remove_listener(listener)
+    @listeners.delete(listener)
+  end
+
+  def notify
+    @listeners.each { |lst| lst.on_datalist_changed(data_table) }
   end
 
   # Выбрать элемент по номеру
@@ -41,7 +52,7 @@ class DataList
   # Добавить элементы в конец списка
   def replace_objects(objects)
     self.objects = objects.dup
-    EventManager.notify(EventUpdateStudentsTable.new(data_table, column_names))
+    notify
   end
 
   protected

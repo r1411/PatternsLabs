@@ -2,9 +2,6 @@
 
 require 'glimmer-dsl-libui'
 require './LabStudents/controllers/tab_students_controller'
-require './LabStudents/events/event_manager'
-require './LabStudents/events/impl/event_update_students_table'
-require './LabStudents/events/impl/event_update_students_count'
 
 class TabStudents
   include Glimmer
@@ -18,21 +15,20 @@ class TabStudents
   end
 
   def on_create
-    EventManager.subscribe(self, EventUpdateStudentsTable)
-    EventManager.subscribe(self, EventUpdateStudentsCount)
+    @controller.on_view_created
     @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
   end
 
-  def on_event(event)
-    case event
-    when EventUpdateStudentsTable
-      arr = event.new_table.to_2d_array
-      arr.map { |row| row[3] = [row[3][:value], contact_color(row[3][:type])] }
-      @table.model_array = arr
-    when EventUpdateStudentsCount
-      @total_count = event.new_count
-      @page_label.text = "#{@current_page} / #{(@total_count / STUDENTS_PER_PAGE.to_f).ceil}"
-    end
+  # Метод наблюдателя datalist
+  def on_datalist_changed(new_table)
+    arr = new_table.to_2d_array
+    arr.map { |row| row[3] = [row[3][:value], contact_color(row[3][:type])] }
+    @table.model_array = arr
+  end
+
+  def update_student_count(new_cnt)
+    @total_count = new_cnt
+    @page_label.text = "#{@current_page} / #{(@total_count / STUDENTS_PER_PAGE.to_f).ceil}"
   end
 
   def contact_color(type)

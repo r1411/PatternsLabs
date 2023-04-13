@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+MainWindow *-- TabStudents
+TabStudents *-- TabStudentsController
+TabStudentsController *-- TabStudents
+
+class MainWindow {
+    --
+    +create(): Window
+}
+
+class TabStudents {
+    -controller: TabStudentsController
+    -current_page: Integer
+    -total_count: Integer
+    --
+    +create(): HorizontalBox
+    +on_create()
+    +on_datalist_changed(DataTable)
+    +update_student_count(Integer)
+}
+
+class TabStudentsController {
+    -students_rep: StudentRepository
+    -view: TabStudents
+    -data_list: DataListStudentShort
+    --
+    +show_view()
+    +refresh_data(Integer, Integer)
+    +on_view_created()
+}
+
+@enduml
