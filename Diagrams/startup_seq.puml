@@ -1,0 +1,74 @@
+@startuml
+participant "main.rb"                       as main
+
+
+
+
+boundary    "mw: MainWindow"                as mw
+boundary    "ts: TabStudents"               as ts
+control     "tsc: TabStudentsController"    as tsc
+entity      "dlss: DataListStudentShort"    as dlss
+entity      "srep: StudentRepository"       as srep
+entity      "dbsa: DBSourceAdapter"         as dbsa
+entity      "DBDataSource"            as dbds
+
+database    DB                              as db
+
+main -> mw : <<new>>
+mw -> ts : <<new>>
+ts -> tsc : <<new>>(self)
+tsc -> dlss : <<new>>(Array)
+dlss --> tsc
+tsc -> dlss : add_listener(TabStudents)
+dlss --> tsc
+tsc --> ts
+ts --> mw
+mw --> main
+
+main -> mw : create()
+mw -> ts : create()
+ts -> tsc : on_view_created()
+tsc -> dbsa : <<new>>
+dbsa -> dbds : <<instance>>
+dbds -> dbds : <<new>>
+dbds -> db : [connect]
+db --> dbds
+dbds --> dbsa
+dbsa --> tsc
+tsc -> srep : <<new>>(DBSourceAdapter)
+srep --> tsc
+tsc --> ts
+
+ts -> tsc : refresh_data(Integer, Integer)
+tsc -> srep : paginated_short_students(Integer, Integer, DataListStudentShort)
+srep -> dbsa : paginated_short_students(Integer, Integer, DataListStudentShort)
+dbsa -> dbds : prepare_exec(String, Integer, Integer)
+dbds -> db : [SELECT]
+db --> dbds
+dbds --> dbsa
+dbsa -> dlss : <<new>>(Array)
+dlss --> dbsa
+dbsa -> dlss : replace_objects(Array)
+dlss -> ts : on_datalist_changed(DataTable)
+ts --> dlss
+dlss --> dbsa
+dbsa --> srep
+srep --> tsc
+
+tsc -> srep : student_count()
+srep -> dbsa : student_count()
+dbsa -> dbds: query(String)
+dbds -> db : [SELECT]
+db --> dbds
+dbds --> dbsa
+dbsa --> srep
+srep --> tsc
+tsc -> ts : update_student_count(Integer)
+ts --> tsc
+tsc --> ts
+ts --> mw
+mw --> main
+
+
+
+@enduml
