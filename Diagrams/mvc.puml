@@ -4,6 +4,9 @@
 MainWindow *-- TabStudents
 TabStudents *-- TabStudentsController
 TabStudentsController *-- TabStudents
+DataList ..> DataTable
+TabStudentsController o-- DataListStudentShort
+TabStudentsController o-- StudentRepository
 
 class MainWindow {
     --
@@ -31,4 +34,63 @@ class TabStudentsController {
     +on_view_created()
 }
 
+class DataTable {
+    -table: Array
+    -rows_count: Integer
+    -cols_count: Integer
+    --
+    +initialize(Array)
+    +get_item(Integer, Integer): Object
+    +to_2d_array(): Array
+    .. Геттеры ..
+    +rows_count(): Integer
+    +cols_count(): Integer
+    -table(): Array
+    .. Сеттеры ..
+    -rows_count=(Integer)
+    -cols_count=(Integer)
+    -table=(Array)
+}
+
+abstract class DataList {
+    -objects: Array
+    -selected_num: Integer
+    -listeners: Array
+    --
+    -initialize(Array)
+    +select_element(Integer)
+    +data_table(): DataTable
+    +selected_id(): Integer
+    +replace_objects(Array)
+    +add_listener(Object)
+    +remove_listener(Object)
+    +notify()
+    #column_names(): Array
+    #table_fields(Object): Array
+    .. Геттеры ..
+    -selected_num(): Integer
+    -objects(): Array
+    .. Сеттеры ..
+    -selected_num=(Integer)
+    +objects=(Array)
+}
+
+class DataListStudentShort extends DataList {
+    --
+    +initialize(Array)
+    +column_names(): Array
+    #table_fields(StudentShort): Array
+}
+
+class StudentRepository {
+    -data_source_adapter
+    --
+    +initialize(data_source_adapter)
+    +student_by_id(Integer): Student
+    +paginated_short_students(Integer, Integer, DataList=nil): DataList
+    +add_student(Student): Integer
+    +replace_student(Integer, Student)
+    +remove_student(Integer)
+    +student_count(): Integer
+}
 @enduml
