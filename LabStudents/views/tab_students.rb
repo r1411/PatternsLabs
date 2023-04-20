@@ -133,7 +133,13 @@ class TabStudents
         button('Добавить') { stretchy false }
         button('Изменить') { stretchy false }
         button('Удалить') { stretchy false }
-        button('Обновить') { stretchy false }
+        button('Обновить') {
+          stretchy false
+
+          on_clicked {
+            @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+          }
+        }
       }
     }
     on_create
