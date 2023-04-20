@@ -90,6 +90,10 @@ class TabStudents
       vertical_box {
         @table = refined_table(
           table_editable: false,
+          filter: lambda do |row_hash, query|
+            utf8_query = query.force_encoding("utf-8")
+            row_hash['Фамилия И. О'].include?(utf8_query)
+          end,
           table_columns: {
             '#' => :text,
             'Фамилия И. О' => :text,
