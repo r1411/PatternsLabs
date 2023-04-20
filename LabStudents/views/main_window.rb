@@ -11,7 +11,7 @@ class MainWindow
   end
 
   def create
-    window('Универ', 600, 200) {
+    window('Универ', 900, 200) {
       tab {
         tab_item('Студенты') {
           @view_tab_students.create
