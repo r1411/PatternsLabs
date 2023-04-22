@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+actor       Пользователь                        as user
+boundary    "ts: TabStudents"                   as ts
+boundary    "sif: StudentInputForm"             as sif
+control     "sifc: StudentInputFormController"  as sifc
+entity      "srep: StudentRepository"           as srep
+
+user -> ts : Клик на <<Доабвить>>
+ts -> sif : <<new>>
+sif -> sifc : <<new>>
+sifc --> sif
+sif --> ts
+ts -> sif : create
+sif -> sif : on_create
+sif -> sifc : on_view_created
+sifc -> srep : <<new>>
+srep --> sifc
+sifc --> sif
+sif --> ts
+ts --> user
+
+user -> sif : Клик на <<Сохранить>>
+sif -> sif : validate_and_save
+sif -> sifc : save_student
+sifc -> srep : add_student
+srep --> sifc
+sifc --> sif
+sif --> user
+
+@enduml
