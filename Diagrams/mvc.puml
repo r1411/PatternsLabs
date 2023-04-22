@@ -7,6 +7,9 @@ TabStudentsController *-- TabStudents
 DataList ..> DataTable
 TabStudentsController o-- DataListStudentShort
 TabStudentsController o-- StudentRepository
+StudentInputForm *-- StudentInputFormController
+StudentInputFormController *-- StudentInputForm
+StudentInputFormController o-- StudentRepository
 
 class MainWindow {
     --
@@ -32,6 +35,28 @@ class TabStudentsController {
     +show_view()
     +refresh_data(Integer, Integer)
     +on_view_created()
+}
+
+class StudentInputForm {
+    -controller: StudentInputFormController
+    -existing_student: Student
+    --
+    +initialize(Student = nil)
+    +create(): Window
+    +on_create()
+    +validate_and_save()
+    +close()
+}
+
+class StudentInputFormController {
+    -view: StudentInputForm
+    -existing_student: Student
+    -student_rep: StudentRepository
+    --
+    +initialize(StudentInputForm, Student)
+    +on_view_created()
+    +save_student(Student)
+    +on_db_conn_error()
 }
 
 class DataTable {

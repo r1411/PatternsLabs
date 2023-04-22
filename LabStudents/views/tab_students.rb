@@ -2,6 +2,7 @@
 
 require 'glimmer-dsl-libui'
 require './LabStudents/controllers/tab_students_controller'
+require './LabStudents/views/student_input_form'
 
 class TabStudents
   include Glimmer
@@ -130,7 +131,13 @@ class TabStudents
       vertical_box {
         stretchy false
 
-        button('Добавить') { stretchy false }
+        button('Добавить') {
+          stretchy false
+
+          on_clicked {
+            StudentInputForm.new.create.show
+          }
+        }
         button('Изменить') { stretchy false }
         button('Удалить') { stretchy false }
         button('Обновить') {
