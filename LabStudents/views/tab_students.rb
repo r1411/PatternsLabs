@@ -141,7 +141,13 @@ class TabStudents
             @controller.show_modal_add
           }
         }
-        button('Изменить') { stretchy false }
+        button('Изменить') {
+          stretchy false
+
+          on_clicked {
+            @controller.show_modal_edit(@current_page, STUDENTS_PER_PAGE, @table.selection) unless @table.selection.nil?
+          }
+        }
         button('Удалить') { stretchy false }
         button('Обновить') {
           stretchy false

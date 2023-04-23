@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+actor       Пользователь                        as user
+boundary    "ts: TabStudents"                   as ts
+control     "tsс: TabStudentsController"        as tsc
+boundary    "sif: StudentInputForm"             as sif
+control     "sifce: StudentInputFormControllerEdit"  as sifce
+entity      "srep: StudentRepository"           as srep
+
+user -> ts : Клик на <<Изменить>>
+ts -> tsc : show_modal_edit
+tsc -> sifce : <<new>>
+sifce --> tsc
+tsc -> sif : <<new>>
+sif --> tsc
+tsc -> sifce : set_view
+sifce --> tsc
+tsc -> sif : create
+sif -> sifce : on_view_created
+sifce -> srep : <<new>>
+srep --> sifce
+sifce -> srep : student_by_id
+srep --> sifce
+sifce -> sif : make_readonly
+sif --> sifce
+sifce -> sif : set_value
+sif --> sifce
+sifce --> sif
+sif --> tsc
+tsc -> sif : show
+sif --> tsc
+tsc --> ts
+ts --> user
+
+user -> sif : Клик на <<Сохранить>>
+sif -> sifce : process_fields
+sifce -> srep : replace_student
+srep --> sifce
+sifce -> sif : close
+sif --> sifce
+sifce --> sif
+sif --> user
+
+
+@enduml

@@ -59,7 +59,7 @@ class StudentInputForm
 
   def make_readonly(*fields)
     fields.each do |field|
-      field.read_only = true
+      @entries[field].read_only = true
     end
   end
 

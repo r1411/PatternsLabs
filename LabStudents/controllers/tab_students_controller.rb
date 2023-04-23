@@ -5,6 +5,8 @@ require './LabStudents/repositories/student_repository'
 require './LabStudents/repositories/adapters/db_source_adapter'
 require './LabStudents/repositories/containers/data_list_student_short'
 require './LabStudents/views/student_input_form'
+require './LabStudents/controllers/student_input_form/student_input_form_controller_create'
+require './LabStudents/controllers/student_input_form/student_input_form_controller_edit'
 require 'win32api'
 
 class TabStudentsController
@@ -33,8 +35,14 @@ class TabStudentsController
     view.create.show
   end
 
-  def show_modal_edit(current_page, selected_row)
-
+  def show_modal_edit(current_page, per_page, selected_row)
+    student_num = (current_page - 1) * per_page + selected_row
+    @data_list.select_element(student_num)
+    student_id = @data_list.selected_id
+    controller = StudentInputFormControllerEdit.new(self, student_id)
+    view = StudentInputForm.new(controller)
+    controller.set_view(view)
+    view.create.show
   end
 
   def refresh_data(page, per_page)

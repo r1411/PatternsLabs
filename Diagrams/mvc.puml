@@ -7,9 +7,14 @@ TabStudentsController *-- TabStudents
 DataList ..> DataTable
 TabStudentsController o-- DataListStudentShort
 TabStudentsController o-- StudentRepository
-StudentInputForm *-- StudentInputFormControllerCreate
+
+StudentInputForm *-u- StudentInputFormControllerCreate
 StudentInputFormControllerCreate *-- StudentInputForm
 StudentInputFormControllerCreate o-- StudentRepository
+
+StudentInputForm *-u- StudentInputFormControllerEdit
+StudentInputFormControllerEdit *-- StudentInputForm
+StudentInputFormControllerEdit o-- StudentRepository
 
 class MainWindow {
     --
@@ -63,6 +68,20 @@ class StudentInputFormControllerCreate {
     +set_view(view)
     +on_view_created()
     +process_fields(Hash)
+    -on_db_conn_error()
+}
+
+class StudentInputFormControllerEdit {
+    -view: StudentInputForm
+    -parent_controller
+    -student_rep: StudentRepository
+    -existing_student_id: Integer
+    --
+    +initialize(parent_controller)
+    +set_view(view)
+    +on_view_created()
+    +process_fields(Hash)
+    +populate_fields()
     -on_db_conn_error()
 }
 
