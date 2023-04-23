@@ -5,30 +5,38 @@
 
 actor       Пользователь                        as user
 boundary    "ts: TabStudents"                   as ts
+control     "tsс: TabStudentsController"        as tsc
 boundary    "sif: StudentInputForm"             as sif
-control     "sifc: StudentInputFormController"  as sifc
+control     "sifcc: StudentInputFormControllerCreate"  as sifcc
 entity      "srep: StudentRepository"           as srep
 
 user -> ts : Клик на <<Доабвить>>
-ts -> sif : <<new>>
-sif -> sifc : <<new>>
-sifc --> sif
-sif --> ts
-ts -> sif : create
-sif -> sif : on_create
-sif -> sifc : on_view_created
-sifc -> srep : <<new>>
-srep --> sifc
-sifc --> sif
-sif --> ts
+ts -> tsc : show_modal_add
+tsc -> sifcc : <<new>>
+sifcc --> tsc
+tsc -> sif : <<new>>
+sif --> tsc
+tsc -> sifcc : set_view
+sifcc --> tsc
+tsc -> sif : create
+sif -> sifcc : on_view_created
+sifcc -> srep : <<new>>
+srep --> sifcc
+sifcc --> sif
+sif --> tsc
+tsc -> sif : show
+sif --> tsc
+tsc --> ts
 ts --> user
 
 user -> sif : Клик на <<Сохранить>>
-sif -> sif : validate_and_save
-sif -> sifc : save_student
-sifc -> srep : add_student
-srep --> sifc
-sifc --> sif
+sif -> sifcc : process_fields
+sifcc -> srep : add_student
+srep --> sifcc
+sifcc -> sif : close
+sif --> sifcc
+sifcc --> sif
 sif --> user
+
 
 @enduml

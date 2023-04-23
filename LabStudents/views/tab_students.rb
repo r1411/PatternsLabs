@@ -23,7 +23,9 @@ class TabStudents
   # Метод наблюдателя datalist
   def on_datalist_changed(new_table)
     arr = new_table.to_2d_array
-    arr.map { |row| row[3] = [row[3][:value], contact_color(row[3][:type])] }
+    arr.map do |row|
+      row[3] = [row[3][:value], contact_color(row[3][:type])] unless row[3].nil?
+    end
     @table.model_array = arr
   end
 
@@ -100,7 +102,8 @@ class TabStudents
             'Фамилия И. О' => :text,
             'Гит' => :text,
             'Контакт' => :text_color
-          }
+          },
+          per_page: STUDENTS_PER_PAGE
         )
 
         @pages = horizontal_box {
@@ -135,7 +138,7 @@ class TabStudents
           stretchy false
 
           on_clicked {
-            StudentInputForm.new.create.show
+            @controller.show_modal_add
           }
         }
         button('Изменить') { stretchy false }
