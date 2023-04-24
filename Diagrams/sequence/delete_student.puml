@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+actor       Пользователь                        as user
+boundary    "ts: TabStudents"                   as ts
+control     "tsс: TabStudentsController"        as tsc
+entity      "srep: StudentRepository"           as srep
+
+user -> ts : Клик на <<Удалить>>
+ts -> tsc : delete_selected
+tsc -> srep : remove_student
+srep --> tsc
+tsc --> ts
+ts -> tsc : refresh_data
+tsc -> srep : paginated_short_students
+srep --> tsc
+tsc -> ts : update_student_count
+ts --> tsc
+tsc --> ts
+ts --> user
+
+@enduml
