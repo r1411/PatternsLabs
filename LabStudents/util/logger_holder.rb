@@ -2,6 +2,9 @@
 
 require 'logger'
 
+##
+# Обертка для хранения объекта Logger
+
 class LoggerHolder
   private_class_method :new
   @instance_mutex = Mutex.new

@@ -2,6 +2,9 @@
 
 require 'mysql2'
 
+##
+# Источник данных из БД
+
 class DBDataSource
   private_class_method :new
   @instance_mutex = Mutex.new

@@ -4,6 +4,9 @@ require './LabStudents/models/student'
 require './LabStudents/models/student_short'
 require './LabStudents/repositories/containers/data_list_student_short'
 
+##
+# Источник данных из файла
+
 class FileDataSource
   attr_writer :data_transformer
 
@@ -28,7 +31,6 @@ class FileDataSource
     students.detect { |s| s.id == student_id }
   end
 
-  # Получить page по счету count элементов (страница начинается с 1)
   def paginated_short_students(page, count, existing_data_list = nil)
     offset = (page - 1) * count
     slice = students[offset, count].map { |s| StudentShort.from_student(s) }

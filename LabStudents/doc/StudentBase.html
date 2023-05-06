@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class StudentBase - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Object
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-valid_email-3F">::valid_email?</a>
+    <li ><a href="#method-c-valid_name-3F">::valid_name?</a>
+    <li ><a href="#method-c-valid_phone-3F">::valid_phone?</a>
+    <li ><a href="#method-c-valid_profile_name-3F">::valid_profile_name?</a>
+    <li ><a href="#method-i-email-3D">#email=</a>
+    <li ><a href="#method-i-git-3D">#git=</a>
+    <li ><a href="#method-i-has_contacts-3F">#has_contacts?</a>
+    <li ><a href="#method-i-has_git-3F">#has_git?</a>
+    <li ><a href="#method-i-phone-3D">#phone=</a>
+    <li ><a href="#method-i-short_contact">#short_contact</a>
+    <li ><a href="#method-i-telegram-3D">#telegram=</a>
+    <li ><a href="#method-i-valid-3F">#valid?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-StudentBase">
+  <h1 id="class-StudentBase" class="class">
+    class StudentBase
+  </h1>
+
+  <section class="description">
+    
+<p>Абстрактный класс с базовым описанием студента</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-email" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">email</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-git" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">git</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-id" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">id</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-phone" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">phone</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-telegram" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">telegram</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(id: nil, phone: nil, telegram: nil, email: nil, git: nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Стандартный конструктор. Принимает именованные параметры: id - Id студента phone - Телефон telegram - Ник в телеграме email - Электронная почта git - Ник на гите</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">id:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">phone:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">telegram:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">email:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">git:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span> = <span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">phone</span> = <span class="ruby-identifier">phone</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">telegram</span> = <span class="ruby-identifier">telegram</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> = <span class="ruby-identifier">email</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">git</span> = <span class="ruby-identifier">git</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-valid_email-3F" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">valid_email?</span><span
+            class="method-args">(email)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Валидация email</p>
+
+          <div class="method-source-code" id="valid_email-3F-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">valid_email?</span>(<span class="ruby-identifier">email</span>)
+  <span class="ruby-identifier">email</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^(?:[a-z0-9!#$%&amp;&#39;*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;&#39;*+\/=?^_`{|}~-]+)*|&quot;(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*&quot;)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-valid_name-3F" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">valid_name?</span><span
+            class="method-args">(name)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Валидация имени (также применимо к фамилии и отчеству)</p>
+
+          <div class="method-source-code" id="valid_name-3F-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">valid_name?</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/(^[А-Я][а-я]+$)|(^[A-Z][a-z]+$)/</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-valid_phone-3F" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">valid_phone?</span><span
+            class="method-args">(phone)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Валидация номера телефона</p>
+
+          <div class="method-source-code" id="valid_phone-3F-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">valid_phone?</span>(<span class="ruby-identifier">phone</span>)
+  <span class="ruby-identifier">phone</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^\+?[78] ?[(-]?\d{3} ?[)-]?[ -]?\d{3}[ -]?\d{2}[ -]?\d{2}$/</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-valid_profile_name-3F" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">valid_profile_name?</span><span
+            class="method-args">(profile_name)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Валидация имени профиля пользователя</p>
+
+          <div class="method-source-code" id="valid_profile_name-3F-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">valid_profile_name?</span>(<span class="ruby-identifier">profile_name</span>)
+  <span class="ruby-identifier">profile_name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^[a-zA-Z0-9_.]+$/</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-has_contacts-3F" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">has_contacts?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Возвращает true, если у студента есть хотя бы один из контактов</p>
+
+          <div class="method-source-code" id="has_contacts-3F-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_contacts?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">phone</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">telegram</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">email</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-has_git-3F" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">has_git?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Возвращает true, если у студента есть гит</p>
+
+          <div class="method-source-code" id="has_git-3F-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_git?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">git</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-short_contact" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">short_contact</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Возвращает первый доступный контакт пользователя в виде хеша. Пример: {type: :telegram, value: ‘xoxolovelylove’}</p>
+
+          <div class="method-source-code" id="short_contact-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">short_contact</span>
+  <span class="ruby-identifier">contact</span> = {}
+  <span class="ruby-node">%i[telegram email phone]</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">attr_val</span> = <span class="ruby-identifier">send</span>(<span class="ruby-identifier">attr</span>)
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">attr_val</span>.<span class="ruby-identifier">nil?</span>
+
+    <span class="ruby-identifier">contact</span>[<span class="ruby-value">:type</span>] = <span class="ruby-identifier">attr</span>
+    <span class="ruby-identifier">contact</span>[<span class="ruby-value">:value</span>] = <span class="ruby-identifier">attr_val</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">contact</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-valid-3F" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">valid?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Возвращает true, если у студента есть хотя бы один из контактов и гит</p>
+
+          <div class="method-source-code" id="valid-3F-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">valid?</span>
+  <span class="ruby-identifier">has_contacts?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">has_git?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+      <div id="method-i-email-3D" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">email=</span><span
+            class="method-args">(new_email)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="email-3D-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">email=</span>(<span class="ruby-identifier">new_email</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid argument: email=#{new_email}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">new_email</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-constant">StudentBase</span>.<span class="ruby-identifier">valid_email?</span>(<span class="ruby-identifier">new_email</span>)
+
+  <span class="ruby-ivar">@email</span> = <span class="ruby-identifier">new_email</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-git-3D" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">git=</span><span
+            class="method-args">(new_git)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="git-3D-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">git=</span>(<span class="ruby-identifier">new_git</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid argument: git=#{new_git}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">new_git</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-constant">StudentBase</span>.<span class="ruby-identifier">valid_profile_name?</span>(<span class="ruby-identifier">new_git</span>)
+
+  <span class="ruby-ivar">@git</span> = <span class="ruby-identifier">new_git</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-phone-3D" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">phone=</span><span
+            class="method-args">(new_phone)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="phone-3D-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">phone=</span>(<span class="ruby-identifier">new_phone</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid argument: phone=#{new_phone}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">new_phone</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-constant">StudentBase</span>.<span class="ruby-identifier">valid_phone?</span>(<span class="ruby-identifier">new_phone</span>)
+
+  <span class="ruby-ivar">@phone</span> = <span class="ruby-identifier">new_phone</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-telegram-3D" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">telegram=</span><span
+            class="method-args">(new_telegram)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="telegram-3D-source">
+            <pre><span class="ruby-comment"># File models/student_base.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">telegram=</span>(<span class="ruby-identifier">new_telegram</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid argument: telegram=#{new_telegram}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">new_telegram</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-constant">StudentBase</span>.<span class="ruby-identifier">valid_profile_name?</span>(<span class="ruby-identifier">new_telegram</span>)
+
+  <span class="ruby-ivar">@telegram</span> = <span class="ruby-identifier">new_telegram</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -10,6 +10,9 @@ require './LabStudents/controllers/student_input_form/student_input_form_control
 require './LabStudents/util/logger_holder'
 require 'win32api'
 
+##
+# Контроллер для вкладки со списком студентов
+
 class TabStudentsController
   def initialize(view)
     LoggerHolder.instance.debug('TabStudentsController: init start')
@@ -18,6 +21,9 @@ class TabStudentsController
     @data_list.add_listener(@view)
     LoggerHolder.instance.debug('TabStudentsController: init done')
   end
+
+  ##
+  # Вызывается из view после ее создания
 
   def on_view_created
     begin
@@ -28,6 +34,10 @@ class TabStudentsController
     end
   end
 
+
+  ##
+  # Показать модальное окно с добавлением студента
+
   def show_modal_add
     LoggerHolder.instance.debug('TabStudentsController: showing modal (add)')
     controller = StudentInputFormControllerCreate.new(self)
@@ -35,6 +45,9 @@ class TabStudentsController
     controller.set_view(view)
     view.create.show
   end
+
+  ##
+  # Показать модальное окно с изменением выделенного студента
 
   def show_modal_edit(current_page, per_page, selected_row)
     LoggerHolder.instance.debug('TabStudentsController: showing modal (edit)')
@@ -46,6 +59,9 @@ class TabStudentsController
     controller.set_view(view)
     view.create.show
   end
+
+  ##
+  # Удалить выбранного студента
 
   def delete_selected(current_page, per_page, selected_row)
     begin
@@ -59,6 +75,9 @@ class TabStudentsController
     end
   end
 
+  ##
+  # Обновить данные в таблице студентов
+
   def refresh_data(page, per_page)
     begin
       LoggerHolder.instance.debug('TabStudentsController: refreshing data...')
@@ -70,6 +89,9 @@ class TabStudentsController
   end
 
   private
+
+  ##
+  # Обработчик ошибки подключения к БД
 
   def on_db_conn_error(error)
     LoggerHolder.instance.error('TabStudentsController: DB connection error:')

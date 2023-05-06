@@ -3,10 +3,14 @@
 require 'json'
 require_relative 'student_base'
 
+##
+# Модель студента
+
 class Student < StudentBase
-  # Делаем new предка публичным
   public_class_method :new
 
+  ##
+  # Конструктор из Hash. Ключи являются символами
   def self.from_hash(hash)
     hash = hash.dup
     raise ArgumentError, 'Fields required: fist_name, last_name, father_name' unless hash.key?(:first_name) && hash.key?(:last_name) && hash.key?(:father_name)
@@ -18,19 +22,20 @@ class Student < StudentBase
     Student.new(last_name, first_name, father_name, **hash)
   end
 
+  ##
   # Конструктор из JSON строки
+
   def self.from_json_str(str)
     params = JSON.parse(str, { symbolize_names: true })
     from_hash(params)
   end
 
-  # Делаем публичными геттеры и сеттеры базового класса
   public :phone, :telegram, :email, 'id=', 'phone=', 'telegram=', 'email=', 'git='
 
-  # Стандартные геттеры для полей
   attr_reader :last_name, :first_name, :father_name
 
-  # Стандартный конструктор
+  ##
+  # Стандартный конструктор. Принимает: Фамилия, Имя, Отчество, а также именованные параметры для предка
   def initialize(last_name, first_name, father_name, **options)
     self.last_name = last_name
     self.first_name = first_name
@@ -38,7 +43,6 @@ class Student < StudentBase
     super(**options)
   end
 
-  # Сеттеры с валидацией перед присваиванием
   def last_name=(new_last_name)
     raise ArgumentError, "Invalid argument: last_name=#{new_last_name}" unless Student.valid_name?(new_last_name)
 
@@ -57,19 +61,29 @@ class Student < StudentBase
     @father_name = new_father_name
   end
 
-  # Отдельный сеттер для массовой установки контактов
+  ##
+  # Сеттер для массовой установки контактов
+
   def set_contacts(phone: nil, telegram: nil, email: nil)
     self.phone = phone if phone
     self.telegram = telegram if telegram
     self.email = email if email
   end
 
-  # Имя пользователя в формате Фамилия И. О.
+  ##
+  # Вернуть фамилию и инициалы в виде строки "Фамилия И. О."
+
   def last_name_and_initials
     "#{last_name} #{first_name[0]}. #{father_name[0]}."
   end
 
-  # Краткая информация о пользователе
+  ##
+  # Краткая информация о пользователе в виде JSON строки.
+  # Поля:
+  # last_name_and_initials - Фамилия и инициалы в виде "Фамилия И. О."
+  # contact - Приоритетный доступный контакт в виде хеша (StudentBase#short_contact)
+  # git - Имя пользователя на гите
+
   def short_info
     info = {}
     info[:last_name_and_initials] = last_name_and_initials
@@ -78,7 +92,9 @@ class Student < StudentBase
     JSON.generate(info)
   end
 
-  # Методы приведения объекта к строке
+  ##
+  # Преобразование студента в строку
+
   def to_s
     result = "#{last_name} #{first_name} #{father_name}"
     %i[id phone telegram email git].each do |attr|
@@ -88,6 +104,9 @@ class Student < StudentBase
     result
   end
 
+  ##
+  # Преобразование студента в хеш. Поля являются ключами
+
   def to_hash
     attrs = {}
     %i[last_name first_name father_name id phone telegram email git].each do |attr|
@@ -96,6 +115,9 @@ class Student < StudentBase
     end
     attrs
   end
+
+  ##
+  # Преобразование студента в JSON строку.
 
   def to_json_str
     JSON.generate(to_hash)

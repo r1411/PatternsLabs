@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class DataList - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Object
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-add_listener">#add_listener</a>
+    <li ><a href="#method-i-column_names">#column_names</a>
+    <li ><a href="#method-i-data_table">#data_table</a>
+    <li ><a href="#method-i-notify">#notify</a>
+    <li ><a href="#method-i-remove_listener">#remove_listener</a>
+    <li ><a href="#method-i-replace_objects">#replace_objects</a>
+    <li ><a href="#method-i-select_element">#select_element</a>
+    <li ><a href="#method-i-selected_id">#selected_id</a>
+    <li ><a href="#method-i-table_fields">#table_fields</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-DataList">
+  <h1 id="class-DataList" class="class">
+    class DataList
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-objects" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">objects</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Это “абстрактный” класс</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(objects)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Конструктор, принимает массив любых объектов</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">objects</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">objects</span> = <span class="ruby-identifier">objects</span>
+  <span class="ruby-ivar">@listeners</span> = []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-add_listener" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">add_listener</span><span
+            class="method-args">(listener)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="add_listener-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_listener</span>(<span class="ruby-identifier">listener</span>)
+  <span class="ruby-ivar">@listeners</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">listener</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-data_table" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">data_table</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Получить <a href="DataTable.html"><code>DataTable</code></a> со всеми элементами.</p>
+
+          <div class="method-source-code" id="data_table-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data_table</span>
+  <span class="ruby-identifier">result</span> = []
+  <span class="ruby-identifier">counter</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">row</span> = []
+    <span class="ruby-identifier">row</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">counter</span>
+    <span class="ruby-identifier">row</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">table_fields</span>(<span class="ruby-identifier">obj</span>))
+    <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">row</span>
+    <span class="ruby-identifier">counter</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">DataTable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-notify" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">notify</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="notify-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">notify</span>
+  <span class="ruby-ivar">@listeners</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">lst</span><span class="ruby-operator">|</span> <span class="ruby-identifier">lst</span>.<span class="ruby-identifier">on_datalist_changed</span>(<span class="ruby-identifier">data_table</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-remove_listener" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">remove_listener</span><span
+            class="method-args">(listener)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="remove_listener-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_listener</span>(<span class="ruby-identifier">listener</span>)
+  <span class="ruby-ivar">@listeners</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">listener</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-replace_objects" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">replace_objects</span><span
+            class="method-args">(objects)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Добавить элементы в конец списка</p>
+
+          <div class="method-source-code" id="replace_objects-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace_objects</span>(<span class="ruby-identifier">objects</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">objects</span> = <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">notify</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-select_element" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">select_element</span><span
+            class="method-args">(number)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Выбрать элемент по номеру</p>
+
+          <div class="method-source-code" id="select_element-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select_element</span>(<span class="ruby-identifier">number</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">selected_num</span> = <span class="ruby-identifier">number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">number</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-selected_id" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">selected_id</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="selected_id-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">selected_id</span>
+  <span class="ruby-identifier">objects</span>[<span class="ruby-identifier">selected_num</span>].<span class="ruby-identifier">id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+      <div id="method-i-column_names" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">column_names</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Имена атрибутов объектов по порядку. Переопределить в наследниках</p>
+
+          <div class="method-source-code" id="column_names-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">column_names</span>
+  []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-table_fields" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">table_fields</span><span
+            class="method-args">(_obj)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Список значений полей для <a href="DataTable.html"><code>DataTable</code></a>. Переопределить в наследниках</p>
+
+          <div class="method-source-code" id="table_fields-source">
+            <pre><span class="ruby-comment"># File repositories/containers/data_list.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">table_fields</span>(<span class="ruby-identifier">_obj</span>)
+  []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

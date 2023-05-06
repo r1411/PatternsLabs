@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class StudentShort < StudentBase
-  # Делаем new предка публичным
-  public_class_method :new
+##
+# Модель с краткой информацией о студенте
 
-  # Стандартные геттеры и сеттеры
+class StudentShort < StudentBase
+  public_class_method :new
 
   private
 
@@ -14,14 +14,20 @@ class StudentShort < StudentBase
 
   attr_reader :last_name_and_initials, :contact
 
-  # Конструктор из Student
+  ##
+  # Конструктор из объекта класса Student
+
   def self.from_student(student)
     raise ArgumentError, 'Student ID is required' if student.id.nil?
 
     StudentShort.new(student.id, student.short_info)
   end
 
-  # Стандартный конструктор
+  ##
+  # Стандартный конструктор. Принимает:
+  # id - Числовой id студента
+  # info_str - JSON строка с полями last_name_and_initials (обязательно), contact, git, а также полями базового класса
+
   def initialize(id, info_str)
     params = JSON.parse(info_str, { symbolize_names: true })
     raise ArgumentError, 'Fields required: last_name_and_initials' if !params.key?(:last_name_and_initials) || params[:last_name_and_initials].nil?
@@ -38,7 +44,9 @@ class StudentShort < StudentBase
     super(**options)
   end
 
-  # Методы приведения объекта к строке
+  ##
+  # Преобразование объекта в строку
+
   def to_s
     result = last_name_and_initials
     %i[id contact git].each do |attr|
