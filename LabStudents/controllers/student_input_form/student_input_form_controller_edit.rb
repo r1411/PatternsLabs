@@ -1,22 +1,25 @@
 # frozen_string_literal: true
 
+require './LabStudents/util/logger_holder'
 require 'win32api'
 
 class StudentInputFormControllerEdit
   def initialize(parent_controller, existing_student_id)
     @parent_controller = parent_controller
     @existing_student_id = existing_student_id
+    LoggerHolder.instance.debug('StudentInputFormControllerEdit: initialized')
   end
 
   def set_view(view)
     @view = view
+    LoggerHolder.instance.debug('StudentInputFormControllerEdit: view set')
   end
 
   def on_view_created
     begin
       @student_rep = StudentRepository.new(DBSourceAdapter.new)
-    rescue Mysql2::Error::ConnectionError
-      on_db_conn_error
+    rescue Mysql2::Error::ConnectionError => e
+      on_db_conn_error(e)
     end
     @existing_student = @student_rep.student_by_id(@existing_student_id)
     @view.make_readonly(:git, :telegram, :email, :phone)
@@ -37,10 +40,13 @@ class StudentInputFormControllerEdit
     begin
       new_student = Student.from_hash(fields)
 
+      LoggerHolder.instance.debug('StudentInputFormControllerEdit: replacing student in DB')
+
       @student_rep.replace_student(@existing_student_id, new_student)
 
       @view.close
     rescue ArgumentError => e
+      LoggerHolder.instance.debug("StudentInputFormControllerEdit: wrong fields: #{e.message}")
       api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
       api.call(0, e.message, 'Error', 0)
     end
@@ -48,7 +54,9 @@ class StudentInputFormControllerEdit
 
   private
 
-  def on_db_conn_error
+  def on_db_conn_error(error)
+    LoggerHolder.instance.debug('StudentInputFormControllerEdit: DB connection error:')
+    LoggerHolder.instance.error(error.message)
     api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
     api.call(0, "No connection to DB", "Error", 0)
     @view.close
